@@ -1,0 +1,488 @@
+$mol_scroll $mol_view
+	scroll_top?val 0
+	scroll_left?val 0
+	field *
+		^
+		tabIndex <= tabindex -1
+	event *
+		^
+		scroll?event <=> event_scroll?event null
+
+$mol_page $mol_view
+	dom_name \article
+	field *
+		^
+		tabIndex <= tabindex -1
+	sub /
+		<= Head $mol_view
+			minimal_height 64
+			dom_name \header
+			sub <= head /
+				<= Title $mol_view
+					dom_name \h1
+					sub <= title_content /
+						<= Logo null
+						<= title
+				<= Tools $mol_view
+					sub <= tools /$mol_view_content
+		<= Body $mol_scroll
+			scroll_top?val => body_scroll_top?val
+			sub <= body /$mol_view_content
+		<= Foot $mol_view
+			dom_name \footer
+			sub <= foot /$mol_view
+
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+	style_size *
+
+$mol_svg_group $mol_svg
+	dom_name \g
+
+$mol_svg_title $mol_svg
+	dom_name \title
+	sub /
+		<= title
+
+$mol_plot_graph $mol_svg_group
+	series_x /number
+	series_y /number
+	-
+	attr *
+		^
+		mol_plot_graph_type <= type \solid
+	-
+	style *
+		^
+		color <= color \
+	-
+	viewport $mol_vector_2d /
+		<= viewport_x $mol_vector_range /
+			Infinity
+			-Infinity
+		<= viewport_y $mol_vector_range /
+			Infinity
+			-Infinity
+	shift /number
+		0
+		0
+	scale /number
+		1
+		1
+	cursor_position $mol_vector_2d /
+		NaN
+		NaN
+	dimensions_pane $mol_vector_2d /
+		<= dimensions_pane_x $mol_vector_range /
+			Infinity
+			-Infinity
+		<= dimensions_pane_y $mol_vector_range /
+			Infinity
+			-Infinity
+	dimensions $mol_vector_2d /
+		<= dimensions_x $mol_vector_range /
+			Infinity
+			-Infinity
+		<= dimensions_y $mol_vector_range /
+			Infinity
+			-Infinity
+	size_real $mol_vector_2d /
+		0
+		0
+	gap $mol_vector_2d /
+		<= gap_x $mol_vector_range /
+			0
+			0
+		<= gap_y $mol_vector_range /
+			0
+			0
+	repos_x* 0
+	repos_y* 0
+	indexes /number
+	points /readonly(number)[]
+	front /$mol_svg
+	back /$mol_svg
+	Hint $mol_svg_title
+		title <= hint <= title \
+	hue +NaN
+	Sample null
+
+$mol_plot_graph_sample $mol_view
+	attr *
+		^
+		mol_plot_graph_type <= type \solid
+	style *
+		^
+		color <= color \black
+
+$mol_plot_line $mol_plot_graph
+	threshold 1
+	spacing 2
+	color_fill \none
+	dom_name \path
+	attr *
+		^
+		d <= curve \
+	sub /
+		<= Hint
+	-
+	Sample $mol_plot_graph_sample
+		color <= color
+		type <= type
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_plot_dot $mol_plot_graph
+	points_max +Infinity
+	aspect 1
+	style *
+		^
+		stroke-width <= diameter 8
+	sub /
+		<= Hint
+		<= Curve $mol_svg_path
+			geometry <= curve \
+	-
+	Sample $mol_plot_graph_sample
+		color <= color
+
+$mol_plot_group $mol_plot_graph
+	sub <= graphs_enriched <= graphs /$mol_plot_graph
+	Sample $mol_plot_graph_sample
+		sub <= graph_samples /$mol_view
+
+$mol_svg_text $mol_svg
+	dom_name \text
+	pos /
+	attr *
+		^
+		x <= pos_x \
+		y <= pos_y \
+		text-anchor <= align \middle
+	sub /
+		<= text \
+
+$mol_svg_rect $mol_svg
+	dom_name \rect
+	pos /
+	attr *
+		^
+		width <= width \0
+		height <= height \0
+		x <= pos_x \
+		y <= pos_y \
+
+$mol_svg_text_box $mol_svg_group
+	font_size 16
+	width 0
+	sub /
+		<= Back $mol_svg_rect
+			width <= box_width \0.5rem
+			height <= box_height \1rem
+			pos /
+				<= box_pos_x <= pos_x
+				<= box_pos_y \0
+		<= Text $mol_svg_text
+			pos /
+				<= pos_x \0
+				<= pos_y \100%
+			align <= align \start
+			sub /
+				<= text \
+
+$mol_plot_ruler $mol_plot_graph
+	step 0
+	scale_axis 1
+	scale_step 1
+	shift_axis 1
+	dimensions_axis $mol_vector_range /
+		Infinity
+		-Infinity
+	viewport_axis $mol_vector_range /
+		Infinity
+		-Infinity
+	axis_points /number
+	normalize?val 0
+	precision 1
+	sub /
+		<= Background $mol_svg_rect
+			pos_x <= background_x \0
+			pos_y <= background_y \0
+			width <= background_width \100%
+			height <= background_height \14
+		<= Curve $mol_svg_path
+			geometry <= curve \
+		<= labels_formatted /
+		<= Title $mol_svg_text_box
+			pos_x <= title_pos_x \0
+			pos_y <= title_pos_y \100%
+			align <= title_align \start
+			text <= title
+	Label* $mol_svg_text
+		pos <= label_pos* /
+			<= label_pos_x* \
+			<= label_pos_y* \
+		text <= label_text* \
+		align <= label_align \
+
+$mol_plot_ruler_vert $mol_plot_ruler
+	title_align \end
+	label_align \end
+	title_pos_y \14
+	label_pos_x* <= title_pos_x
+	background_height \100%
+	background_width <= title_pos_x
+
+$mol_plot_ruler_hor $mol_plot_ruler
+	title_align \start
+	label_align \middle
+	title_pos_x \0
+	title_pos_y \100%
+	label_pos_y* <= title_pos_y
+	background_width \100%
+
+$mol_plot_mark_hor $mol_plot_ruler_hor
+	labels /string
+
+$mol_plot_mark_cross $mol_plot_graph
+	labels /string
+	title_x_gap 4
+	threshold 16
+	graphs /$mol_plot_graph
+	dimensions $mol_vector_2d /
+		<= dimensions_x $mol_vector_range /
+			Infinity
+			-Infinity
+		<= dimensions_y $mol_vector_range /
+			Infinity
+			-Infinity
+	sub /
+		<= Curve $mol_svg_path
+			geometry <= curve \
+		<= Label_x $mol_svg_text_box
+			pos_x <= title_x_pos_x \0
+			pos_y <= title_x_pos_y \100%
+			text <= title_x \
+		<= Label_y $mol_svg_text_box
+			pos_x <= title_y_pos_x \0
+			pos_y <= title_y_pos_y \0
+			text <= title_y \
+
+$mol_chart_legend $mol_scroll
+	graphs /$mol_plot_graph
+	graphs_front /$mol_plot_graph
+	sub <= graph_legends /$mol_view
+	-
+	Graph_legend* $mol_view
+		sub /
+			<= Graph_sample_box* $mol_view
+				sub /
+					<= Graph_sample* null
+			<= Graph_title* $mol_view
+				sub /
+					<= graph_title* \
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_touch $mol_plugin
+	start_zoom?val 0
+	start_distance?val 0
+	zoom?val 1
+	allow_draw true
+	allow_pan true
+	allow_zoom true
+	action_type?val \
+	action_point?val $mol_vector_2d /
+		NaN
+		NaN
+	-
+	start_pan?val /
+		0
+		0
+	pan?val $mol_vector_2d /
+		0
+		0
+	pointer_center $mol_vector_2d /
+		NaN
+		NaN
+	-
+	start_pos?val null
+	swipe_precision 16
+	-
+	swipe_right?val null
+	swipe_bottom?val null
+	swipe_left?val null
+	swipe_top?val null
+	-
+	swipe_from_right?val null
+	swipe_from_bottom?val null
+	swipe_from_left?val null
+	swipe_from_top?val null
+	-
+	swipe_to_right?val null
+	swipe_to_bottom?val null
+	swipe_to_left?val null
+	swipe_to_top?val null
+	-
+	draw_start?event null
+	draw?event null
+	draw_end?event null
+	-
+	style *
+		^
+		touch-action \none
+		overscroll-behavior \none
+	-
+	event *
+		^
+		pointerdown?event <=> event_start?event null
+		pointermove?event <=> event_move?event null
+		pointerup?event <=> event_end?event null
+		pointerleave?event <=> event_leave?event null
+		wheel?event <=> event_wheel?event null
+
+$mol_plot_pane $mol_svg_root
+	aspect \none
+	-
+	hue_base?val +NaN
+	hue_shift?val 111
+	-
+	gap_hor 48
+	gap_vert 24
+	gap_left <= gap_hor
+	gap_right <= gap_hor
+	gap_top <= gap_vert
+	gap_bottom <= gap_vert
+	gap $mol_vector_2d /
+		<= gap_x $mol_vector_range /
+			<= gap_left
+			<= gap_right
+		<= gap_y $mol_vector_range /
+			<= gap_bottom
+			<= gap_top
+	-
+	shift_limit $mol_vector_2d /
+		<= shift_limit_x $mol_vector_range /
+			0
+			0
+		<= shift_limit_y $mol_vector_range /
+			0
+			0
+	shift_default $mol_vector_2d /
+		0
+		0
+	shift?val $mol_vector_2d /
+		0
+		0
+	scale_limit $mol_vector_2d /
+		<= scale_limit_x $mol_vector_range /
+			0
+			Infinity
+		<= scale_limit_y $mol_vector_range /
+			0
+			-Infinity
+	scale_default $mol_vector_2d /
+		0
+		0
+	scale?val $mol_vector_2d /
+		1
+		-1
+	scale_x?val 1
+	scale_y?val -1
+	size $mol_vector_2d /
+		0
+		0
+	size_real $mol_vector_2d /
+		1
+		1
+	dimensions $mol_vector_2d /
+		<= dimensions_x $mol_vector_range /
+			Infinity
+			-Infinity
+		<= dimensions_y $mol_vector_range /
+			Infinity
+			-Infinity
+	dimensions_viewport $mol_vector_2d /
+		<= dimensions_viewport_x $mol_vector_range /
+			Infinity
+			-Infinity
+		<= dimensions_viewport_y $mol_vector_range /
+			Infinity
+			-Infinity
+	-
+	sub <= graphs_sorted /$mol_svg
+	graphs_colored <= graphs_visible <= graphs_positioned <= graphs /$mol_plot_graph
+	-
+	plugins /
+		^
+		<= Touch $mol_touch
+			zoom?val <=> zoom?val 1
+			pan?val <=> shift?val
+			pointer_center => cursor_position
+			allow_draw <= allow_draw true
+			allow_pan <= allow_pan true
+			allow_zoom <= allow_zoom true
+			action_type => action_type
+			action_point => action_point
+			draw_start?event <=> draw_start?event null
+			draw?event <=> draw?event null
+			draw_end?event <=> draw_end?event null
+	- event *
+		^
+		dblclick?event <=> reset?event null
+
+$mol_chart $mol_view
+	gap_hor 48
+	gap_vert 24
+	gap_left <= gap_hor
+	gap_right <= gap_hor
+	gap_bottom <= gap_vert
+	gap_top <= gap_vert
+	graphs /$mol_plot_graph
+	sub /
+		<= Legend $mol_chart_legend
+			graphs <= graphs_colored
+		<= Plot $mol_plot_pane
+			scale_x?val => zoom?val
+			zoom?val <=> zoom?val
+			gap_left <= gap_left
+			gap_right <= gap_right
+			gap_bottom <= gap_bottom
+			gap_top <= gap_top
+			graphs <= graphs
+			graphs_colored => graphs_colored
+			hue_base <= hue_base 140
+			hue_shift <= hue_shift 111
+
+$scripts $mol_page
+	body /
+		<= Chart $mol_chart
+			graphs /
+				<= Fact $mol_plot_group
+					title <= fact_title \Gb
+					series_y <= facts /
+					graphs /
+						<= Fact_line $mol_plot_line
+						<= Fact_dots $mol_plot_dot
+				<= Vert_ruler $mol_plot_ruler_vert
+				<= Marker_hor $mol_plot_mark_hor
+					title <= marker_hor_title \Days
+					labels <= months /string
+				<= Marker_cross $mol_plot_mark_cross
+					labels <= months
+					graphs /
+						<= Fact
+						<= Fact_dots
