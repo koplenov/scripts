@@ -473,7 +473,7 @@ declare namespace $ {
     class $mol_wire_task<Host, Args extends readonly unknown[], Result> extends $mol_wire_fiber<Host, Args, Result> {
         static getter<Host, Args extends readonly unknown[], Result>(task: (this: Host, ...args: Args) => Result): (host: Host, args: Args) => $mol_wire_task<Host, [...Args], Result>;
         complete(): void;
-        put(next: Result | Error | Promise<Result | Error>): Result | Error | Promise<Result | Error>;
+        put(next: Result | Error | Promise<Result | Error>): Error | Result | Promise<Error | Result>;
     }
 }
 
@@ -1116,6 +1116,227 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_chart_legend extends $mol_scroll {
+        graphs(): readonly $mol_plot_graph[];
+        graphs_front(): readonly $mol_plot_graph[];
+        sub(): readonly $mol_view[];
+        Graph_legend(id: any): $mol_view;
+        graph_legends(): readonly $mol_view[];
+        Graph_sample(id: any): any;
+        Graph_sample_box(id: any): $mol_view;
+        graph_title(id: any): string;
+        Graph_title(id: any): $mol_view;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_chart_legend extends $.$mol_chart_legend {
+        graphs_front(): readonly $mol_plot_graph[];
+        graph_legends(): readonly $mol_view[];
+        graph_title(index: number): string;
+        Graph_sample(index: number): any;
+    }
+}
+
+declare namespace $ {
+    class $mol_svg_root extends $mol_svg {
+        dom_name(): string;
+        attr(): {
+            viewBox: string;
+            preserveAspectRatio: string;
+        };
+        view_box(): string;
+        aspect(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_touch extends $mol_plugin {
+        start_zoom(val?: any): number;
+        start_distance(val?: any): number;
+        zoom(val?: any): number;
+        allow_draw(): boolean;
+        allow_pan(): boolean;
+        allow_zoom(): boolean;
+        action_type(val?: any): string;
+        action_point(val?: any): $mol_vector_2d<number>;
+        start_pan(val?: any): readonly any[];
+        pan(val?: any): $mol_vector_2d<number>;
+        pointer_center(): $mol_vector_2d<number>;
+        start_pos(val?: any): any;
+        swipe_precision(): number;
+        swipe_right(val?: any): any;
+        swipe_bottom(val?: any): any;
+        swipe_left(val?: any): any;
+        swipe_top(val?: any): any;
+        swipe_from_right(val?: any): any;
+        swipe_from_bottom(val?: any): any;
+        swipe_from_left(val?: any): any;
+        swipe_from_top(val?: any): any;
+        swipe_to_right(val?: any): any;
+        swipe_to_bottom(val?: any): any;
+        swipe_to_left(val?: any): any;
+        swipe_to_top(val?: any): any;
+        draw_start(event?: any): any;
+        draw(event?: any): any;
+        draw_end(event?: any): any;
+        style(): {
+            "touch-action": string;
+            "overscroll-behavior": string;
+        };
+        event(): {
+            pointerdown: (event?: any) => any;
+            pointermove: (event?: any) => any;
+            pointerup: (event?: any) => any;
+            pointerleave: (event?: any) => any;
+            wheel: (event?: any) => any;
+        };
+        event_start(event?: any): any;
+        event_move(event?: any): any;
+        event_end(event?: any): any;
+        event_leave(event?: any): any;
+        event_wheel(event?: any): any;
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_touch extends $.$mol_touch {
+        auto(): void;
+        pointer_events(next?: readonly PointerEvent[]): readonly PointerEvent[];
+        pointer_coords(): $mol_vector<$mol_vector_2d<number>, number>;
+        pointer_center(): $mol_vector_2d<number>;
+        event_coords(event: PointerEvent | WheelEvent): $mol_vector_2d<number>;
+        action_point(): $mol_vector_2d<number>;
+        event_eat(event: PointerEvent | WheelEvent): string;
+        event_start(event: PointerEvent): void;
+        event_move(event: PointerEvent): void;
+        event_end(event: PointerEvent): void;
+        event_leave(event: PointerEvent): void;
+        swipe_left(event: PointerEvent): void;
+        swipe_right(event: PointerEvent): void;
+        swipe_top(event: PointerEvent): void;
+        swipe_bottom(event: PointerEvent): void;
+        event_wheel(event: WheelEvent): void;
+    }
+}
+
+declare namespace $ {
+    class $mol_plot_pane extends $mol_svg_root {
+        aspect(): string;
+        hue_base(val?: any): number;
+        hue_shift(val?: any): number;
+        gap_hor(): number;
+        gap_vert(): number;
+        gap_left(): number;
+        gap_right(): number;
+        gap_top(): number;
+        gap_bottom(): number;
+        gap(): $mol_vector_2d<$mol_vector_range<number>>;
+        shift_limit(): $mol_vector_2d<$mol_vector_range<number>>;
+        shift_default(): $mol_vector_2d<number>;
+        shift(val?: any): $mol_vector_2d<number>;
+        scale_limit(): $mol_vector_2d<$mol_vector_range<number>>;
+        scale_default(): $mol_vector_2d<number>;
+        scale(val?: any): $mol_vector_2d<number>;
+        scale_x(val?: any): number;
+        scale_y(val?: any): number;
+        size(): $mol_vector_2d<number>;
+        size_real(): $mol_vector_2d<number>;
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+        dimensions_viewport(): $mol_vector_2d<$mol_vector_range<number>>;
+        sub(): readonly $mol_svg[];
+        graphs_colored(): readonly $mol_plot_graph[];
+        plugins(): readonly any[];
+        gap_x(): $mol_vector_range<number>;
+        gap_y(): $mol_vector_range<number>;
+        shift_limit_x(): $mol_vector_range<number>;
+        shift_limit_y(): $mol_vector_range<number>;
+        scale_limit_x(): $mol_vector_range<number>;
+        scale_limit_y(): $mol_vector_range<number>;
+        dimensions_x(): $mol_vector_range<number>;
+        dimensions_y(): $mol_vector_range<number>;
+        dimensions_viewport_x(): $mol_vector_range<number>;
+        dimensions_viewport_y(): $mol_vector_range<number>;
+        graphs_sorted(): readonly $mol_svg[];
+        graphs(): readonly $mol_plot_graph[];
+        graphs_positioned(): readonly $mol_plot_graph[];
+        graphs_visible(): readonly $mol_plot_graph[];
+        zoom(val?: any): number;
+        allow_draw(): boolean;
+        allow_pan(): boolean;
+        allow_zoom(): boolean;
+        draw_start(event?: any): any;
+        draw(event?: any): any;
+        draw_end(event?: any): any;
+        cursor_position(): $mol_vector_2d<number>;
+        action_type(): string;
+        action_point(): $mol_vector_2d<number>;
+        Touch(): $$.$mol_touch;
+    }
+}
+
+declare namespace $ {
+    let $mol_mem_cached: typeof $mol_wire_probe;
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_plot_pane extends $.$mol_plot_pane {
+        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
+        size(): $mol_vector_2d<number>;
+        graph_hue(index: number): number;
+        graphs_colored(): $.$mol_plot_graph[];
+        size_real(): $mol_vector_2d<number>;
+        view_box(): string;
+        scale_limit(): $mol_vector_2d<$mol_vector_range<number>>;
+        scale_default(): $mol_vector_2d<number>;
+        scale(next?: $mol_vector_2d<number>): $mol_vector_2d<number>;
+        scale_x(next?: number): number;
+        scale_y(next?: number): number;
+        shift_limit(): $mol_vector_2d<$mol_vector_range<number>>;
+        shift_default(): $mol_vector_2d<number>;
+        graph_touched: boolean;
+        shift(next?: $mol_vector_2d<number>): $mol_vector_2d<number>;
+        reset(event?: Event): void;
+        graphs_visible(): $.$mol_plot_graph[];
+        graphs_positioned(): readonly $.$mol_plot_graph[];
+        dimensions_viewport(): $mol_vector<$mol_vector_range<number>, 2>;
+        viewport(): $mol_vector_2d<$mol_vector_range<number>>;
+        graphs_sorted(): $.$mol_svg[];
+    }
+}
+
+declare namespace $ {
+    class $mol_chart extends $mol_view {
+        gap_hor(): number;
+        gap_vert(): number;
+        gap_left(): number;
+        gap_right(): number;
+        gap_bottom(): number;
+        gap_top(): number;
+        graphs(): readonly $mol_plot_graph[];
+        sub(): readonly any[];
+        Legend(): $$.$mol_chart_legend;
+        hue_base(): number;
+        hue_shift(): number;
+        zoom(val?: any): number;
+        graphs_colored(): $mol_plot_graph[];
+        Plot(): $$.$mol_plot_pane;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_plot_line extends $mol_plot_graph {
         threshold(): number;
         spacing(): number;
@@ -1469,240 +1690,24 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_chart_legend extends $mol_scroll {
-        graphs(): readonly $mol_plot_graph[];
-        graphs_front(): readonly $mol_plot_graph[];
-        sub(): readonly $mol_view[];
-        Graph_legend(id: any): $mol_view;
-        graph_legends(): readonly $mol_view[];
-        Graph_sample(id: any): any;
-        Graph_sample_box(id: any): $mol_view;
-        graph_title(id: any): string;
-        Graph_title(id: any): $mol_view;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_chart_legend extends $.$mol_chart_legend {
-        graphs_front(): readonly $mol_plot_graph[];
-        graph_legends(): readonly $mol_view[];
-        graph_title(index: number): string;
-        Graph_sample(index: number): any;
-    }
-}
-
-declare namespace $ {
-    class $mol_svg_root extends $mol_svg {
-        dom_name(): string;
-        attr(): {
-            viewBox: string;
-            preserveAspectRatio: string;
-        };
-        view_box(): string;
-        aspect(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_touch extends $mol_plugin {
-        start_zoom(val?: any): number;
-        start_distance(val?: any): number;
-        zoom(val?: any): number;
-        allow_draw(): boolean;
-        allow_pan(): boolean;
-        allow_zoom(): boolean;
-        action_type(val?: any): string;
-        action_point(val?: any): $mol_vector_2d<number>;
-        start_pan(val?: any): readonly any[];
-        pan(val?: any): $mol_vector_2d<number>;
-        pointer_center(): $mol_vector_2d<number>;
-        start_pos(val?: any): any;
-        swipe_precision(): number;
-        swipe_right(val?: any): any;
-        swipe_bottom(val?: any): any;
-        swipe_left(val?: any): any;
-        swipe_top(val?: any): any;
-        swipe_from_right(val?: any): any;
-        swipe_from_bottom(val?: any): any;
-        swipe_from_left(val?: any): any;
-        swipe_from_top(val?: any): any;
-        swipe_to_right(val?: any): any;
-        swipe_to_bottom(val?: any): any;
-        swipe_to_left(val?: any): any;
-        swipe_to_top(val?: any): any;
-        draw_start(event?: any): any;
-        draw(event?: any): any;
-        draw_end(event?: any): any;
-        style(): {
-            "touch-action": string;
-            "overscroll-behavior": string;
-        };
-        event(): {
-            pointerdown: (event?: any) => any;
-            pointermove: (event?: any) => any;
-            pointerup: (event?: any) => any;
-            pointerleave: (event?: any) => any;
-            wheel: (event?: any) => any;
-        };
-        event_start(event?: any): any;
-        event_move(event?: any): any;
-        event_end(event?: any): any;
-        event_leave(event?: any): any;
-        event_wheel(event?: any): any;
-    }
-}
-
-declare namespace $.$$ {
-    class $mol_touch extends $.$mol_touch {
-        auto(): void;
-        pointer_events(next?: readonly PointerEvent[]): readonly PointerEvent[];
-        pointer_coords(): $mol_vector<$mol_vector_2d<number>, number>;
-        pointer_center(): $mol_vector_2d<number>;
-        event_coords(event: PointerEvent | WheelEvent): $mol_vector_2d<number>;
-        action_point(): $mol_vector_2d<number>;
-        event_eat(event: PointerEvent | WheelEvent): string;
-        event_start(event: PointerEvent): void;
-        event_move(event: PointerEvent): void;
-        event_end(event: PointerEvent): void;
-        event_leave(event: PointerEvent): void;
-        swipe_left(event: PointerEvent): void;
-        swipe_right(event: PointerEvent): void;
-        swipe_top(event: PointerEvent): void;
-        swipe_bottom(event: PointerEvent): void;
-        event_wheel(event: WheelEvent): void;
-    }
-}
-
-declare namespace $ {
-    class $mol_plot_pane extends $mol_svg_root {
-        aspect(): string;
-        hue_base(val?: any): number;
-        hue_shift(val?: any): number;
-        gap_hor(): number;
-        gap_vert(): number;
-        gap_left(): number;
-        gap_right(): number;
-        gap_top(): number;
-        gap_bottom(): number;
-        gap(): $mol_vector_2d<$mol_vector_range<number>>;
-        shift_limit(): $mol_vector_2d<$mol_vector_range<number>>;
-        shift_default(): $mol_vector_2d<number>;
-        shift(val?: any): $mol_vector_2d<number>;
-        scale_limit(): $mol_vector_2d<$mol_vector_range<number>>;
-        scale_default(): $mol_vector_2d<number>;
-        scale(val?: any): $mol_vector_2d<number>;
-        scale_x(val?: any): number;
-        scale_y(val?: any): number;
-        size(): $mol_vector_2d<number>;
-        size_real(): $mol_vector_2d<number>;
-        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
-        dimensions_viewport(): $mol_vector_2d<$mol_vector_range<number>>;
-        sub(): readonly $mol_svg[];
-        graphs_colored(): readonly $mol_plot_graph[];
-        plugins(): readonly any[];
-        gap_x(): $mol_vector_range<number>;
-        gap_y(): $mol_vector_range<number>;
-        shift_limit_x(): $mol_vector_range<number>;
-        shift_limit_y(): $mol_vector_range<number>;
-        scale_limit_x(): $mol_vector_range<number>;
-        scale_limit_y(): $mol_vector_range<number>;
-        dimensions_x(): $mol_vector_range<number>;
-        dimensions_y(): $mol_vector_range<number>;
-        dimensions_viewport_x(): $mol_vector_range<number>;
-        dimensions_viewport_y(): $mol_vector_range<number>;
-        graphs_sorted(): readonly $mol_svg[];
-        graphs(): readonly $mol_plot_graph[];
-        graphs_positioned(): readonly $mol_plot_graph[];
-        graphs_visible(): readonly $mol_plot_graph[];
-        zoom(val?: any): number;
-        allow_draw(): boolean;
-        allow_pan(): boolean;
-        allow_zoom(): boolean;
-        draw_start(event?: any): any;
-        draw(event?: any): any;
-        draw_end(event?: any): any;
-        cursor_position(): $mol_vector_2d<number>;
-        action_type(): string;
-        action_point(): $mol_vector_2d<number>;
-        Touch(): $$.$mol_touch;
-    }
-}
-
-declare namespace $ {
-    let $mol_mem_cached: typeof $mol_wire_probe;
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_plot_pane extends $.$mol_plot_pane {
-        dimensions(): $mol_vector_2d<$mol_vector_range<number>>;
-        size(): $mol_vector_2d<number>;
-        graph_hue(index: number): number;
-        graphs_colored(): $.$mol_plot_graph[];
-        size_real(): $mol_vector_2d<number>;
-        view_box(): string;
-        scale_limit(): $mol_vector_2d<$mol_vector_range<number>>;
-        scale_default(): $mol_vector_2d<number>;
-        scale(next?: $mol_vector_2d<number>): $mol_vector_2d<number>;
-        scale_x(next?: number): number;
-        scale_y(next?: number): number;
-        shift_limit(): $mol_vector_2d<$mol_vector_range<number>>;
-        shift_default(): $mol_vector_2d<number>;
-        graph_touched: boolean;
-        shift(next?: $mol_vector_2d<number>): $mol_vector_2d<number>;
-        reset(event?: Event): void;
-        graphs_visible(): $.$mol_plot_graph[];
-        graphs_positioned(): readonly $.$mol_plot_graph[];
-        dimensions_viewport(): $mol_vector<$mol_vector_range<number>, 2>;
-        viewport(): $mol_vector_2d<$mol_vector_range<number>>;
-        graphs_sorted(): $.$mol_svg[];
-    }
-}
-
-declare namespace $ {
-    class $mol_chart extends $mol_view {
-        gap_hor(): number;
-        gap_vert(): number;
-        gap_left(): number;
-        gap_right(): number;
-        gap_bottom(): number;
-        gap_top(): number;
-        graphs(): readonly $mol_plot_graph[];
-        sub(): readonly any[];
-        Legend(): $$.$mol_chart_legend;
-        hue_base(): number;
-        hue_shift(): number;
-        zoom(val?: any): number;
-        graphs_colored(): $mol_plot_graph[];
-        Plot(): $$.$mol_plot_pane;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
     class $scripts extends $mol_page {
         body(): readonly any[];
-        fact_title(): string;
-        facts(): readonly any[];
+        txt2img(): $scripts_chart;
+        img2img(): $scripts_chart;
+        root(): $scripts_chart;
+    }
+    class $scripts_chart extends $mol_chart {
+        graphs(): readonly any[];
+        ed_title(): string;
+        y(): readonly any[];
         Fact_line(): $$.$mol_plot_line;
         Fact_dots(): $$.$mol_plot_dot;
         Fact(): $$.$mol_plot_group;
         Vert_ruler(): $$.$mol_plot_ruler_vert;
         marker_hor_title(): string;
-        months(): readonly string[];
+        x(): readonly string[];
         Marker_hor(): $$.$mol_plot_mark_hor;
         Marker_cross(): $$.$mol_plot_mark_cross;
-        Chart(): $mol_chart;
     }
 }
 
@@ -1872,8 +1877,13 @@ declare namespace $ {
 declare namespace $.$$ {
     class $scripts extends $.$scripts {
         data(): any[];
-        months(): string[];
-        facts(): any[];
+        x(): string[];
+        root_y(): any[];
+        txt2img_y(): any[];
+        img2img_y(): any[];
+        root_title(): string;
+        txt2img_title(): string;
+        img2img_title(): string;
     }
 }
 

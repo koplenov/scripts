@@ -3395,6 +3395,1246 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    class $mol_chart_legend extends $mol_scroll {
+        graphs() {
+            return [];
+        }
+        graphs_front() {
+            return [];
+        }
+        sub() {
+            return this.graph_legends();
+        }
+        Graph_legend(id) {
+            const obj = new this.$.$mol_view();
+            obj.sub = () => [
+                this.Graph_sample_box(id),
+                this.Graph_title(id)
+            ];
+            return obj;
+        }
+        graph_legends() {
+            return [];
+        }
+        Graph_sample(id) {
+            return null;
+        }
+        Graph_sample_box(id) {
+            const obj = new this.$.$mol_view();
+            obj.sub = () => [
+                this.Graph_sample(id)
+            ];
+            return obj;
+        }
+        graph_title(id) {
+            return "";
+        }
+        Graph_title(id) {
+            const obj = new this.$.$mol_view();
+            obj.sub = () => [
+                this.graph_title(id)
+            ];
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_chart_legend.prototype, "Graph_legend", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_chart_legend.prototype, "Graph_sample_box", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_chart_legend.prototype, "Graph_title", null);
+    $.$mol_chart_legend = $mol_chart_legend;
+})($ || ($ = {}));
+//mol/chart/legend/-view.tree/legend.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/chart/legend/legend.view.css", "[mol_chart_legend] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex-direction: row;\n\tpadding: .5rem;\n\tmargin: .5rem;\n\tflex: 0 1 auto;\n}\n\n[mol_chart_legend_graph_legend] {\n\tdisplay: flex;\n\tjustify-content: flex-start;\n\tflex: 1 1 8rem;\n\tpadding: .5rem;\n}\n\n[mol_chart_legend_graph_title] {\n\tmargin: 0 .25rem;\n\tflex: 1 1 auto;\n}\n\n[mol_chart_legend_graph_sample_box] {\n\tposition: relative;\n\twidth: 1.5rem;\n\tflex: none;\n}\n");
+})($ || ($ = {}));
+//mol/chart/legend/-css/legend.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_chart_legend extends $.$mol_chart_legend {
+            graphs_front() {
+                return this.graphs().filter(graph => graph.Sample());
+            }
+            graph_legends() {
+                return this.graphs_front().map((graph, index) => this.Graph_legend(index));
+            }
+            graph_title(index) {
+                return this.graphs_front()[index].title();
+            }
+            Graph_sample(index) {
+                return this.graphs_front()[index].Sample();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_chart_legend.prototype, "graphs_front", null);
+        $$.$mol_chart_legend = $mol_chart_legend;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/chart/legend/legend.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_svg_root extends $mol_svg {
+        dom_name() {
+            return "svg";
+        }
+        attr() {
+            return {
+                ...super.attr(),
+                viewBox: this.view_box(),
+                preserveAspectRatio: this.aspect()
+            };
+        }
+        view_box() {
+            return "0 0 100 100";
+        }
+        aspect() {
+            return "xMidYMid";
+        }
+    }
+    $.$mol_svg_root = $mol_svg_root;
+})($ || ($ = {}));
+//mol/svg/root/-view.tree/root.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/svg/root/root.view.css", "[mol_svg_root] {\n\toverflow: hidden;\n}\n");
+})($ || ($ = {}));
+//mol/svg/root/-css/root.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_touch extends $mol_plugin {
+        start_zoom(val) {
+            if (val !== undefined)
+                return val;
+            return 0;
+        }
+        start_distance(val) {
+            if (val !== undefined)
+                return val;
+            return 0;
+        }
+        zoom(val) {
+            if (val !== undefined)
+                return val;
+            return 1;
+        }
+        allow_draw() {
+            return true;
+        }
+        allow_pan() {
+            return true;
+        }
+        allow_zoom() {
+            return true;
+        }
+        action_type(val) {
+            if (val !== undefined)
+                return val;
+            return "";
+        }
+        action_point(val) {
+            if (val !== undefined)
+                return val;
+            const obj = new this.$.$mol_vector_2d(NaN, NaN);
+            return obj;
+        }
+        start_pan(val) {
+            if (val !== undefined)
+                return val;
+            return [
+                0,
+                0
+            ];
+        }
+        pan(val) {
+            if (val !== undefined)
+                return val;
+            const obj = new this.$.$mol_vector_2d(0, 0);
+            return obj;
+        }
+        pointer_center() {
+            const obj = new this.$.$mol_vector_2d(NaN, NaN);
+            return obj;
+        }
+        start_pos(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_precision() {
+            return 16;
+        }
+        swipe_right(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_bottom(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_left(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_top(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_from_right(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_from_bottom(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_from_left(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_from_top(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_to_right(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_to_bottom(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_to_left(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        swipe_to_top(val) {
+            if (val !== undefined)
+                return val;
+            return null;
+        }
+        draw_start(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        draw(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        draw_end(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        style() {
+            return {
+                ...super.style(),
+                "touch-action": "none",
+                "overscroll-behavior": "none"
+            };
+        }
+        event() {
+            return {
+                ...super.event(),
+                pointerdown: (event) => this.event_start(event),
+                pointermove: (event) => this.event_move(event),
+                pointerup: (event) => this.event_end(event),
+                pointerleave: (event) => this.event_leave(event),
+                wheel: (event) => this.event_wheel(event)
+            };
+        }
+        event_start(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        event_move(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        event_end(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        event_leave(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        event_wheel(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "start_zoom", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "start_distance", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "zoom", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "action_type", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "action_point", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "start_pan", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "pan", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "pointer_center", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "start_pos", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_right", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_bottom", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_left", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_top", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_from_right", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_from_bottom", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_from_left", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_from_top", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_to_right", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_to_bottom", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_to_left", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "swipe_to_top", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "draw_start", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "draw", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "draw_end", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "event_start", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "event_move", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "event_end", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "event_leave", null);
+    __decorate([
+        $mol_mem
+    ], $mol_touch.prototype, "event_wheel", null);
+    $.$mol_touch = $mol_touch;
+})($ || ($ = {}));
+//mol/touch/-view.tree/touch.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_touch extends $.$mol_touch {
+            auto() {
+                this.pointer_events();
+                this.start_pan();
+                this.start_pos();
+                this.start_distance();
+                this.start_zoom();
+                this.action_type();
+                this.view_rect();
+            }
+            pointer_events(next = []) {
+                return next;
+            }
+            pointer_coords() {
+                const events = this.pointer_events();
+                const touches = events.filter(e => e.pointerType === 'touch');
+                const pens = events.filter(e => e.pointerType === 'pen');
+                const mouses = events.filter(e => !e.pointerType || e.pointerType === 'mouse');
+                const choosen = touches.length ? touches : pens.length ? pens : mouses;
+                return new $mol_vector(...choosen.map(event => this.event_coords(event)));
+            }
+            pointer_center() {
+                const coords = this.pointer_coords();
+                return coords.length ? coords.center() : new $mol_vector_2d(NaN, NaN);
+            }
+            event_coords(event) {
+                const { left, top } = this.view_rect();
+                return new $mol_vector_2d(Math.round(event.pageX - left), Math.round(event.pageY - top));
+            }
+            action_point() {
+                const coord = this.pointer_center();
+                if (!coord)
+                    return null;
+                const zoom = this.zoom();
+                const pan = this.pan();
+                return new $mol_vector_2d((coord.x - pan.x) / zoom, (coord.y - pan.y) / zoom);
+            }
+            event_eat(event) {
+                if (event instanceof PointerEvent) {
+                    const events = this.pointer_events()
+                        .filter(e => e instanceof PointerEvent)
+                        .filter(e => e.pointerId !== event.pointerId);
+                    if (event.type !== 'pointerup' && event.type !== 'pointerleave')
+                        events.push(event);
+                    this.pointer_events(events);
+                    const touch_count = events.filter(e => e.pointerType === 'touch').length;
+                    if (this.allow_zoom() && touch_count === 2) {
+                        return this.action_type('zoom');
+                    }
+                    if (this.action_type() === 'zoom' && touch_count === 1) {
+                        return this.action_type('zoom');
+                    }
+                    let button;
+                    (function (button) {
+                        button[button["left"] = 1] = "left";
+                        button[button["right"] = 2] = "right";
+                        button[button["middle"] = 4] = "middle";
+                    })(button || (button = {}));
+                    if (events.length > 0) {
+                        if (event.ctrlKey && this.allow_zoom())
+                            return this.action_type('zoom');
+                        if (event.buttons === button.left && this.allow_draw())
+                            return this.action_type('draw');
+                        if (event.buttons && this.allow_pan())
+                            return this.action_type('pan');
+                    }
+                    return this.action_type('');
+                }
+                if (event instanceof WheelEvent) {
+                    this.pointer_events([event]);
+                    if (event.shiftKey)
+                        return this.action_type('pan');
+                    return this.action_type('zoom');
+                }
+                return this.action_type('');
+            }
+            event_start(event) {
+                if (event.defaultPrevented)
+                    return;
+                this.start_pan(this.pan());
+                const action_type = this.event_eat(event);
+                if (!action_type)
+                    return;
+                const coords = this.pointer_coords();
+                this.start_pos(coords.center());
+                if (action_type === 'draw') {
+                    this.draw_start(event);
+                    return;
+                }
+                this.start_distance(coords.distance());
+                this.start_zoom(this.zoom());
+            }
+            event_move(event) {
+                if (event.defaultPrevented)
+                    return;
+                const rect = this.view_rect();
+                if (!rect)
+                    return;
+                const start_pan = this.start_pan();
+                const action_type = this.event_eat(event);
+                const start_pos = this.start_pos();
+                let pos = this.pointer_center();
+                if (!action_type)
+                    return;
+                if (!start_pos)
+                    return;
+                if (action_type === 'draw') {
+                    const distance = new $mol_vector(start_pos, pos).distance();
+                    if (distance >= 4) {
+                        this.draw(event);
+                    }
+                    return;
+                }
+                if (action_type === 'pan') {
+                    this.dom_node().setPointerCapture(event.pointerId);
+                    this.pan(new $mol_vector_2d(start_pan[0] + pos[0] - start_pos[0], start_pan[1] + pos[1] - start_pos[1]));
+                }
+                const precision = this.swipe_precision();
+                if ((this.swipe_right !== $mol_touch.prototype.swipe_right
+                    || this.swipe_from_left !== $mol_touch.prototype.swipe_from_left
+                    || this.swipe_to_right !== $mol_touch.prototype.swipe_to_right)
+                    && pos[0] - start_pos[0] > precision * 2
+                    && Math.abs(pos[1] - start_pos[1]) < precision) {
+                    this.swipe_right(event);
+                }
+                if ((this.swipe_left !== $mol_touch.prototype.swipe_left
+                    || this.swipe_from_right !== $mol_touch.prototype.swipe_from_right
+                    || this.swipe_to_left !== $mol_touch.prototype.swipe_to_left)
+                    && start_pos[0] - pos[0] > precision * 2
+                    && Math.abs(pos[1] - start_pos[1]) < precision) {
+                    this.swipe_left(event);
+                }
+                if ((this.swipe_bottom !== $mol_touch.prototype.swipe_bottom
+                    || this.swipe_from_top !== $mol_touch.prototype.swipe_from_top
+                    || this.swipe_to_bottom !== $mol_touch.prototype.swipe_to_bottom)
+                    && pos[1] - start_pos[1] > precision * 2
+                    && Math.abs(pos[0] - start_pos[0]) < precision) {
+                    this.swipe_bottom(event);
+                }
+                if ((this.swipe_top !== $mol_touch.prototype.swipe_top
+                    || this.swipe_from_bottom !== $mol_touch.prototype.swipe_from_bottom
+                    || this.swipe_to_top !== $mol_touch.prototype.swipe_to_top)
+                    && start_pos[1] - pos[1] > precision * 2
+                    && Math.abs(pos[0] - start_pos[0]) < precision) {
+                    this.swipe_top(event);
+                }
+                if (action_type === 'zoom') {
+                    const coords = this.pointer_coords();
+                    const distance = coords.distance();
+                    const start_distance = this.start_distance();
+                    const center = coords.center();
+                    const start_zoom = this.start_zoom();
+                    let mult = Math.abs(distance - start_distance) < 32 ? 1 : distance / start_distance;
+                    this.zoom(start_zoom * mult);
+                    const pan = new $mol_vector_2d((start_pan[0] - center[0] + pos[0] - start_pos[0]) * mult + center[0], (start_pan[1] - center[1] + pos[1] - start_pos[1]) * mult + center[1]);
+                    this.pan(pan);
+                }
+            }
+            event_end(event) {
+                const action = this.action_type();
+                if (action === 'draw') {
+                    this.draw_end(event);
+                }
+                this.event_leave(event);
+            }
+            event_leave(event) {
+                this.event_eat(event);
+                this.dom_node().releasePointerCapture(event.pointerId);
+                this.start_pos(null);
+            }
+            swipe_left(event) {
+                if (this.view_rect().right - this.start_pos()[0] < this.swipe_precision() * 2)
+                    this.swipe_from_right(event);
+                else
+                    this.swipe_to_left(event);
+                this.event_end(event);
+            }
+            swipe_right(event) {
+                if (this.start_pos()[0] - this.view_rect().left < this.swipe_precision() * 2)
+                    this.swipe_from_left(event);
+                else
+                    this.swipe_to_right(event);
+                this.event_end(event);
+            }
+            swipe_top(event) {
+                if (this.view_rect().bottom - this.start_pos()[1] < this.swipe_precision() * 2)
+                    this.swipe_from_bottom(event);
+                else
+                    this.swipe_to_top(event);
+                this.event_end(event);
+            }
+            swipe_bottom(event) {
+                if (this.start_pos()[1] - this.view_rect().top < this.swipe_precision() * 2)
+                    this.swipe_from_top(event);
+                else
+                    this.swipe_to_bottom(event);
+                this.event_end(event);
+            }
+            event_wheel(event) {
+                if (event.defaultPrevented)
+                    return;
+                if (this.pan === $mol_touch.prototype.pan && this.zoom === $mol_touch.prototype.zoom)
+                    return;
+                if (this.pan !== $mol_touch.prototype.pan) {
+                    event.preventDefault();
+                }
+                const action_type = this.event_eat(event);
+                if (action_type === 'zoom') {
+                    const zoom_prev = this.zoom() || 0.001;
+                    const zoom_next = zoom_prev * (1 - .001 * Math.min(event.deltaY, 100));
+                    const mult = zoom_next / zoom_prev;
+                    this.zoom(zoom_next);
+                    const pan_prev = this.pan();
+                    const center = this.pointer_center();
+                    const pan_next = pan_prev.multed0(mult).added1(center.multed0(1 - mult));
+                    this.pan(pan_next);
+                }
+                if (action_type === 'pan') {
+                    const pan_prev = this.pan();
+                    const pan_next = new $mol_vector_2d(pan_prev.x - event.deltaX, pan_prev.y - event.deltaY);
+                    this.pan(pan_next);
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_touch.prototype, "pointer_events", null);
+        __decorate([
+            $mol_mem
+        ], $mol_touch.prototype, "pointer_coords", null);
+        __decorate([
+            $mol_mem
+        ], $mol_touch.prototype, "pointer_center", null);
+        __decorate([
+            $mol_mem
+        ], $mol_touch.prototype, "action_point", null);
+        $$.$mol_touch = $mol_touch;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/touch/touch.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_plot_pane extends $mol_svg_root {
+        aspect() {
+            return "none";
+        }
+        hue_base(val) {
+            if (val !== undefined)
+                return val;
+            return +NaN;
+        }
+        hue_shift(val) {
+            if (val !== undefined)
+                return val;
+            return 111;
+        }
+        gap_hor() {
+            return 48;
+        }
+        gap_vert() {
+            return 24;
+        }
+        gap_left() {
+            return this.gap_hor();
+        }
+        gap_right() {
+            return this.gap_hor();
+        }
+        gap_top() {
+            return this.gap_vert();
+        }
+        gap_bottom() {
+            return this.gap_vert();
+        }
+        gap() {
+            const obj = new this.$.$mol_vector_2d(this.gap_x(), this.gap_y());
+            return obj;
+        }
+        shift_limit() {
+            const obj = new this.$.$mol_vector_2d(this.shift_limit_x(), this.shift_limit_y());
+            return obj;
+        }
+        shift_default() {
+            const obj = new this.$.$mol_vector_2d(0, 0);
+            return obj;
+        }
+        shift(val) {
+            if (val !== undefined)
+                return val;
+            const obj = new this.$.$mol_vector_2d(0, 0);
+            return obj;
+        }
+        scale_limit() {
+            const obj = new this.$.$mol_vector_2d(this.scale_limit_x(), this.scale_limit_y());
+            return obj;
+        }
+        scale_default() {
+            const obj = new this.$.$mol_vector_2d(0, 0);
+            return obj;
+        }
+        scale(val) {
+            if (val !== undefined)
+                return val;
+            const obj = new this.$.$mol_vector_2d(1, -1);
+            return obj;
+        }
+        scale_x(val) {
+            if (val !== undefined)
+                return val;
+            return 1;
+        }
+        scale_y(val) {
+            if (val !== undefined)
+                return val;
+            return -1;
+        }
+        size() {
+            const obj = new this.$.$mol_vector_2d(0, 0);
+            return obj;
+        }
+        size_real() {
+            const obj = new this.$.$mol_vector_2d(1, 1);
+            return obj;
+        }
+        dimensions() {
+            const obj = new this.$.$mol_vector_2d(this.dimensions_x(), this.dimensions_y());
+            return obj;
+        }
+        dimensions_viewport() {
+            const obj = new this.$.$mol_vector_2d(this.dimensions_viewport_x(), this.dimensions_viewport_y());
+            return obj;
+        }
+        sub() {
+            return this.graphs_sorted();
+        }
+        graphs_colored() {
+            return this.graphs_visible();
+        }
+        plugins() {
+            return [
+                ...super.plugins(),
+                this.Touch()
+            ];
+        }
+        gap_x() {
+            const obj = new this.$.$mol_vector_range(this.gap_left(), this.gap_right());
+            return obj;
+        }
+        gap_y() {
+            const obj = new this.$.$mol_vector_range(this.gap_bottom(), this.gap_top());
+            return obj;
+        }
+        shift_limit_x() {
+            const obj = new this.$.$mol_vector_range(0, 0);
+            return obj;
+        }
+        shift_limit_y() {
+            const obj = new this.$.$mol_vector_range(0, 0);
+            return obj;
+        }
+        scale_limit_x() {
+            const obj = new this.$.$mol_vector_range(0, Infinity);
+            return obj;
+        }
+        scale_limit_y() {
+            const obj = new this.$.$mol_vector_range(0, -Infinity);
+            return obj;
+        }
+        dimensions_x() {
+            const obj = new this.$.$mol_vector_range(Infinity, -Infinity);
+            return obj;
+        }
+        dimensions_y() {
+            const obj = new this.$.$mol_vector_range(Infinity, -Infinity);
+            return obj;
+        }
+        dimensions_viewport_x() {
+            const obj = new this.$.$mol_vector_range(Infinity, -Infinity);
+            return obj;
+        }
+        dimensions_viewport_y() {
+            const obj = new this.$.$mol_vector_range(Infinity, -Infinity);
+            return obj;
+        }
+        graphs_sorted() {
+            return [];
+        }
+        graphs() {
+            return [];
+        }
+        graphs_positioned() {
+            return this.graphs();
+        }
+        graphs_visible() {
+            return this.graphs_positioned();
+        }
+        zoom(val) {
+            if (val !== undefined)
+                return val;
+            return 1;
+        }
+        allow_draw() {
+            return true;
+        }
+        allow_pan() {
+            return true;
+        }
+        allow_zoom() {
+            return true;
+        }
+        draw_start(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        draw(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        draw_end(event) {
+            if (event !== undefined)
+                return event;
+            return null;
+        }
+        cursor_position() {
+            return this.Touch().pointer_center();
+        }
+        action_type() {
+            return this.Touch().action_type();
+        }
+        action_point() {
+            return this.Touch().action_point();
+        }
+        Touch() {
+            const obj = new this.$.$mol_touch();
+            obj.zoom = (val) => this.zoom(val);
+            obj.pan = (val) => this.shift(val);
+            obj.allow_draw = () => this.allow_draw();
+            obj.allow_pan = () => this.allow_pan();
+            obj.allow_zoom = () => this.allow_zoom();
+            obj.draw_start = (event) => this.draw_start(event);
+            obj.draw = (event) => this.draw(event);
+            obj.draw_end = (event) => this.draw_end(event);
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "hue_base", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "hue_shift", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "gap", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "shift_limit", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "shift_default", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "shift", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "scale_limit", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "scale_default", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "scale", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "scale_x", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "scale_y", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "size", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "size_real", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "dimensions", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "dimensions_viewport", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "gap_x", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "gap_y", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "shift_limit_x", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "shift_limit_y", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "scale_limit_x", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "scale_limit_y", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "dimensions_x", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "dimensions_y", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "dimensions_viewport_x", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "dimensions_viewport_y", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "zoom", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "draw_start", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "draw", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "draw_end", null);
+    __decorate([
+        $mol_mem
+    ], $mol_plot_pane.prototype, "Touch", null);
+    $.$mol_plot_pane = $mol_plot_pane;
+})($ || ($ = {}));
+//mol/plot/pane/-view.tree/pane.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_mem_cached = $mol_wire_probe;
+})($ || ($ = {}));
+//mol/mem/cached/cached.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/plot/pane/pane.view.css", "[mol_plot_pane] {\n\tcolor: var(--mol_theme_control);\n\tflex: 1 1 auto;\n\talign-self: stretch;\n\tstroke-width: 2px;\n\tuser-select: none;\n}\n");
+})($ || ($ = {}));
+//mol/plot/pane/-css/pane.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_plot_pane extends $.$mol_plot_pane {
+            dimensions() {
+                const graphs = this.graphs();
+                let next = new this.$.$mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
+                for (let graph of graphs) {
+                    next = next.expanded2(graph.dimensions());
+                }
+                return next;
+            }
+            size() {
+                const dims = this.dimensions();
+                return new this.$.$mol_vector_2d((dims.x.max - dims.x.min) || 1, (dims.y.max - dims.y.min) || 1);
+            }
+            graph_hue(index) {
+                return (360 + (this.hue_base() + this.hue_shift() * index) % 360) % 360;
+            }
+            graphs_colored() {
+                const graphs = this.graphs_visible();
+                for (let index = 0; index < graphs.length; index++) {
+                    graphs[index].hue = () => this.graph_hue(index);
+                }
+                return graphs;
+            }
+            size_real() {
+                const rect = this.view_rect();
+                if (!rect)
+                    return new this.$.$mol_vector_2d(1, 1);
+                return new this.$.$mol_vector_2d(rect.width, rect.height);
+            }
+            view_box() {
+                const size = this.size_real();
+                return `0 0 ${size.x} ${size.y}`;
+            }
+            scale_limit() {
+                const { x: { max: right }, y: { max: top } } = super.scale_limit();
+                const gap = this.gap();
+                const size = this.size();
+                const real = this.size_real();
+                const left = +(real.x - gap.x.min - gap.x.max) / size.x;
+                const bottom = -(real.y - gap.y.max - gap.y.min) / size.y;
+                return new this.$.$mol_vector_2d(new this.$.$mol_vector_range(left, right), new this.$.$mol_vector_range(top, bottom));
+            }
+            scale_default() {
+                const limits = this.scale_limit();
+                return new $mol_vector_2d(limits.x.min, limits.y.max);
+            }
+            scale(next) {
+                if (next === undefined) {
+                    if (!this.graph_touched)
+                        return this.scale_default();
+                    next = $mol_mem_cached(() => this.scale()) ?? this.scale_default();
+                }
+                this.graph_touched = true;
+                return next.limited(this.scale_limit());
+            }
+            scale_x(next) {
+                return this.scale(next === undefined
+                    ? undefined
+                    : new $mol_vector_2d(next, this.scale().y)).x;
+            }
+            scale_y(next) {
+                return this.scale(next === undefined
+                    ? undefined
+                    : new $mol_vector_2d(this.scale().x, next)).y;
+            }
+            shift_limit() {
+                const dims = this.dimensions();
+                const [scale_x, scale_y] = this.scale();
+                const size = this.size_real();
+                const gap = this.gap();
+                const left = gap.x.min - dims.x.min * scale_x;
+                const right = size.x - gap.x.max - dims.x.max * scale_x;
+                const top = gap.y.max - dims.y.max * scale_y;
+                const bottom = size.y - gap.y.min - dims.y.min * scale_y;
+                return new this.$.$mol_vector_2d(new this.$.$mol_vector_range(right, left), new this.$.$mol_vector_range(bottom, top));
+            }
+            shift_default() {
+                const limits = this.shift_limit();
+                return new $mol_vector_2d(limits.x.min, limits.y.min);
+            }
+            graph_touched = false;
+            shift(next) {
+                if (next === undefined) {
+                    if (!this.graph_touched)
+                        return this.shift_default();
+                    next = $mol_mem_cached(() => this.shift()) ?? this.shift_default();
+                }
+                this.graph_touched = true;
+                return next.limited(this.shift_limit());
+            }
+            reset(event) {
+                this.graph_touched = false;
+                this.scale(this.scale_default());
+                this.shift(this.shift_default());
+            }
+            graphs_visible() {
+                const viewport = this.dimensions_viewport();
+                const size_real = this.size_real();
+                const max_x = (viewport.x.max - viewport.x.min) / size_real.x;
+                const max_y = (viewport.y.max - viewport.y.min) / size_real.y;
+                return this.graphs_positioned().filter(graph => {
+                    const dims = graph.dimensions();
+                    if (dims.x.min > dims.x.max)
+                        return true;
+                    if (dims.y.min > dims.y.max)
+                        return true;
+                    const size_x = dims.x.max - dims.x.min;
+                    const size_y = dims.y.max - dims.y.min;
+                    if ((size_x || size_y) && size_x < max_x && size_y < max_y)
+                        return false;
+                    if (dims.x.min > viewport.x.max)
+                        return false;
+                    if (dims.x.max < viewport.x.min)
+                        return false;
+                    if (dims.y.min > viewport.y.max)
+                        return false;
+                    if (dims.y.max < viewport.y.min)
+                        return false;
+                    return true;
+                });
+            }
+            graphs_positioned() {
+                const graphs = this.graphs();
+                for (let graph of graphs) {
+                    graph.shift = () => this.shift();
+                    graph.scale = () => this.scale();
+                    graph.dimensions_pane = () => this.dimensions_viewport();
+                    graph.viewport = () => this.viewport();
+                    graph.size_real = () => this.size_real();
+                    graph.cursor_position = () => this.cursor_position();
+                    graph.gap = () => this.gap();
+                }
+                return graphs;
+            }
+            dimensions_viewport() {
+                const shift = this.shift().multed0(-1);
+                const scale = this.scale().powered0(-1);
+                return this.viewport().map((range, i) => range.added0(shift[i]).multed0(scale[i]).sort((a, b) => a - b));
+            }
+            viewport() {
+                const size = this.size_real();
+                return new this.$.$mol_vector_2d(new this.$.$mol_vector_range(0, size.x), new this.$.$mol_vector_range(0, size.y));
+            }
+            graphs_sorted() {
+                const graphs = this.graphs_colored();
+                const sorted = [];
+                for (let graph of graphs)
+                    sorted.push(...graph.back());
+                for (let graph of graphs)
+                    sorted.push(...graph.front());
+                return sorted;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "dimensions", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "size", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "graphs_colored", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "scale_limit", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "scale", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "shift_limit", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "shift_default", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "shift", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "graphs_visible", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "graphs_positioned", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "dimensions_viewport", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "viewport", null);
+        __decorate([
+            $mol_mem
+        ], $mol_plot_pane.prototype, "graphs_sorted", null);
+        $$.$mol_plot_pane = $mol_plot_pane;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+//mol/plot/pane/pane.view.ts
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_chart extends $mol_view {
+        gap_hor() {
+            return 48;
+        }
+        gap_vert() {
+            return 24;
+        }
+        gap_left() {
+            return this.gap_hor();
+        }
+        gap_right() {
+            return this.gap_hor();
+        }
+        gap_bottom() {
+            return this.gap_vert();
+        }
+        gap_top() {
+            return this.gap_vert();
+        }
+        graphs() {
+            return [];
+        }
+        sub() {
+            return [
+                this.Legend(),
+                this.Plot()
+            ];
+        }
+        Legend() {
+            const obj = new this.$.$mol_chart_legend();
+            obj.graphs = () => this.graphs_colored();
+            return obj;
+        }
+        hue_base() {
+            return 140;
+        }
+        hue_shift() {
+            return 111;
+        }
+        zoom(val) {
+            return this.Plot().scale_x(val);
+        }
+        graphs_colored() {
+            return this.Plot().graphs_colored();
+        }
+        Plot() {
+            const obj = new this.$.$mol_plot_pane();
+            obj.zoom = (val) => this.zoom(val);
+            obj.gap_left = () => this.gap_left();
+            obj.gap_right = () => this.gap_right();
+            obj.gap_bottom = () => this.gap_bottom();
+            obj.gap_top = () => this.gap_top();
+            obj.graphs = () => this.graphs();
+            obj.hue_base = () => this.hue_base();
+            obj.hue_shift = () => this.hue_shift();
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_chart.prototype, "Legend", null);
+    __decorate([
+        $mol_mem
+    ], $mol_chart.prototype, "Plot", null);
+    $.$mol_chart = $mol_chart;
+})($ || ($ = {}));
+//mol/chart/-view.tree/chart.view.tree.ts
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/chart/chart.view.css", "[mol_chart] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-self: stretch;\n\tflex: 1 1 auto;\n}\n\n[mol_chart_plot] {\n\tflex: 1 0 50%;\n\tmargin: .5rem;\n}\n");
+})($ || ($ = {}));
+//mol/chart/-css/chart.view.css.ts
+;
+"use strict";
+var $;
+(function ($) {
     class $mol_plot_line extends $mol_plot_graph {
         threshold() {
             return 1;
@@ -4747,1256 +5987,59 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $mol_chart_legend extends $mol_scroll {
-        graphs() {
-            return [];
-        }
-        graphs_front() {
-            return [];
-        }
-        sub() {
-            return this.graph_legends();
-        }
-        Graph_legend(id) {
-            const obj = new this.$.$mol_view();
-            obj.sub = () => [
-                this.Graph_sample_box(id),
-                this.Graph_title(id)
-            ];
-            return obj;
-        }
-        graph_legends() {
-            return [];
-        }
-        Graph_sample(id) {
-            return null;
-        }
-        Graph_sample_box(id) {
-            const obj = new this.$.$mol_view();
-            obj.sub = () => [
-                this.Graph_sample(id)
-            ];
-            return obj;
-        }
-        graph_title(id) {
-            return "";
-        }
-        Graph_title(id) {
-            const obj = new this.$.$mol_view();
-            obj.sub = () => [
-                this.graph_title(id)
-            ];
-            return obj;
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $mol_chart_legend.prototype, "Graph_legend", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_chart_legend.prototype, "Graph_sample_box", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_chart_legend.prototype, "Graph_title", null);
-    $.$mol_chart_legend = $mol_chart_legend;
-})($ || ($ = {}));
-//mol/chart/legend/-view.tree/legend.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/chart/legend/legend.view.css", "[mol_chart_legend] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex-direction: row;\n\tpadding: .5rem;\n\tmargin: .5rem;\n\tflex: 0 1 auto;\n}\n\n[mol_chart_legend_graph_legend] {\n\tdisplay: flex;\n\tjustify-content: flex-start;\n\tflex: 1 1 8rem;\n\tpadding: .5rem;\n}\n\n[mol_chart_legend_graph_title] {\n\tmargin: 0 .25rem;\n\tflex: 1 1 auto;\n}\n\n[mol_chart_legend_graph_sample_box] {\n\tposition: relative;\n\twidth: 1.5rem;\n\tflex: none;\n}\n");
-})($ || ($ = {}));
-//mol/chart/legend/-css/legend.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_chart_legend extends $.$mol_chart_legend {
-            graphs_front() {
-                return this.graphs().filter(graph => graph.Sample());
-            }
-            graph_legends() {
-                return this.graphs_front().map((graph, index) => this.Graph_legend(index));
-            }
-            graph_title(index) {
-                return this.graphs_front()[index].title();
-            }
-            Graph_sample(index) {
-                return this.graphs_front()[index].Sample();
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_chart_legend.prototype, "graphs_front", null);
-        $$.$mol_chart_legend = $mol_chart_legend;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//mol/chart/legend/legend.view.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_svg_root extends $mol_svg {
-        dom_name() {
-            return "svg";
-        }
-        attr() {
-            return {
-                ...super.attr(),
-                viewBox: this.view_box(),
-                preserveAspectRatio: this.aspect()
-            };
-        }
-        view_box() {
-            return "0 0 100 100";
-        }
-        aspect() {
-            return "xMidYMid";
-        }
-    }
-    $.$mol_svg_root = $mol_svg_root;
-})($ || ($ = {}));
-//mol/svg/root/-view.tree/root.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/svg/root/root.view.css", "[mol_svg_root] {\n\toverflow: hidden;\n}\n");
-})($ || ($ = {}));
-//mol/svg/root/-css/root.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_touch extends $mol_plugin {
-        start_zoom(val) {
-            if (val !== undefined)
-                return val;
-            return 0;
-        }
-        start_distance(val) {
-            if (val !== undefined)
-                return val;
-            return 0;
-        }
-        zoom(val) {
-            if (val !== undefined)
-                return val;
-            return 1;
-        }
-        allow_draw() {
-            return true;
-        }
-        allow_pan() {
-            return true;
-        }
-        allow_zoom() {
-            return true;
-        }
-        action_type(val) {
-            if (val !== undefined)
-                return val;
-            return "";
-        }
-        action_point(val) {
-            if (val !== undefined)
-                return val;
-            const obj = new this.$.$mol_vector_2d(NaN, NaN);
-            return obj;
-        }
-        start_pan(val) {
-            if (val !== undefined)
-                return val;
-            return [
-                0,
-                0
-            ];
-        }
-        pan(val) {
-            if (val !== undefined)
-                return val;
-            const obj = new this.$.$mol_vector_2d(0, 0);
-            return obj;
-        }
-        pointer_center() {
-            const obj = new this.$.$mol_vector_2d(NaN, NaN);
-            return obj;
-        }
-        start_pos(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_precision() {
-            return 16;
-        }
-        swipe_right(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_bottom(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_left(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_top(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_from_right(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_from_bottom(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_from_left(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_from_top(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_to_right(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_to_bottom(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_to_left(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        swipe_to_top(val) {
-            if (val !== undefined)
-                return val;
-            return null;
-        }
-        draw_start(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        draw(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        draw_end(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        style() {
-            return {
-                ...super.style(),
-                "touch-action": "none",
-                "overscroll-behavior": "none"
-            };
-        }
-        event() {
-            return {
-                ...super.event(),
-                pointerdown: (event) => this.event_start(event),
-                pointermove: (event) => this.event_move(event),
-                pointerup: (event) => this.event_end(event),
-                pointerleave: (event) => this.event_leave(event),
-                wheel: (event) => this.event_wheel(event)
-            };
-        }
-        event_start(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        event_move(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        event_end(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        event_leave(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        event_wheel(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "start_zoom", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "start_distance", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "zoom", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "action_type", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "action_point", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "start_pan", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "pan", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "pointer_center", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "start_pos", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_right", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_bottom", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_left", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_top", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_from_right", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_from_bottom", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_from_left", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_from_top", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_to_right", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_to_bottom", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_to_left", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "swipe_to_top", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "draw_start", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "draw", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "draw_end", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "event_start", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "event_move", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "event_end", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "event_leave", null);
-    __decorate([
-        $mol_mem
-    ], $mol_touch.prototype, "event_wheel", null);
-    $.$mol_touch = $mol_touch;
-})($ || ($ = {}));
-//mol/touch/-view.tree/touch.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_touch extends $.$mol_touch {
-            auto() {
-                this.pointer_events();
-                this.start_pan();
-                this.start_pos();
-                this.start_distance();
-                this.start_zoom();
-                this.action_type();
-                this.view_rect();
-            }
-            pointer_events(next = []) {
-                return next;
-            }
-            pointer_coords() {
-                const events = this.pointer_events();
-                const touches = events.filter(e => e.pointerType === 'touch');
-                const pens = events.filter(e => e.pointerType === 'pen');
-                const mouses = events.filter(e => !e.pointerType || e.pointerType === 'mouse');
-                const choosen = touches.length ? touches : pens.length ? pens : mouses;
-                return new $mol_vector(...choosen.map(event => this.event_coords(event)));
-            }
-            pointer_center() {
-                const coords = this.pointer_coords();
-                return coords.length ? coords.center() : new $mol_vector_2d(NaN, NaN);
-            }
-            event_coords(event) {
-                const { left, top } = this.view_rect();
-                return new $mol_vector_2d(Math.round(event.pageX - left), Math.round(event.pageY - top));
-            }
-            action_point() {
-                const coord = this.pointer_center();
-                if (!coord)
-                    return null;
-                const zoom = this.zoom();
-                const pan = this.pan();
-                return new $mol_vector_2d((coord.x - pan.x) / zoom, (coord.y - pan.y) / zoom);
-            }
-            event_eat(event) {
-                if (event instanceof PointerEvent) {
-                    const events = this.pointer_events()
-                        .filter(e => e instanceof PointerEvent)
-                        .filter(e => e.pointerId !== event.pointerId);
-                    if (event.type !== 'pointerup' && event.type !== 'pointerleave')
-                        events.push(event);
-                    this.pointer_events(events);
-                    const touch_count = events.filter(e => e.pointerType === 'touch').length;
-                    if (this.allow_zoom() && touch_count === 2) {
-                        return this.action_type('zoom');
-                    }
-                    if (this.action_type() === 'zoom' && touch_count === 1) {
-                        return this.action_type('zoom');
-                    }
-                    let button;
-                    (function (button) {
-                        button[button["left"] = 1] = "left";
-                        button[button["right"] = 2] = "right";
-                        button[button["middle"] = 4] = "middle";
-                    })(button || (button = {}));
-                    if (events.length > 0) {
-                        if (event.ctrlKey && this.allow_zoom())
-                            return this.action_type('zoom');
-                        if (event.buttons === button.left && this.allow_draw())
-                            return this.action_type('draw');
-                        if (event.buttons && this.allow_pan())
-                            return this.action_type('pan');
-                    }
-                    return this.action_type('');
-                }
-                if (event instanceof WheelEvent) {
-                    this.pointer_events([event]);
-                    if (event.shiftKey)
-                        return this.action_type('pan');
-                    return this.action_type('zoom');
-                }
-                return this.action_type('');
-            }
-            event_start(event) {
-                if (event.defaultPrevented)
-                    return;
-                this.start_pan(this.pan());
-                const action_type = this.event_eat(event);
-                if (!action_type)
-                    return;
-                const coords = this.pointer_coords();
-                this.start_pos(coords.center());
-                if (action_type === 'draw') {
-                    this.draw_start(event);
-                    return;
-                }
-                this.start_distance(coords.distance());
-                this.start_zoom(this.zoom());
-            }
-            event_move(event) {
-                if (event.defaultPrevented)
-                    return;
-                const rect = this.view_rect();
-                if (!rect)
-                    return;
-                const start_pan = this.start_pan();
-                const action_type = this.event_eat(event);
-                const start_pos = this.start_pos();
-                let pos = this.pointer_center();
-                if (!action_type)
-                    return;
-                if (!start_pos)
-                    return;
-                if (action_type === 'draw') {
-                    const distance = new $mol_vector(start_pos, pos).distance();
-                    if (distance >= 4) {
-                        this.draw(event);
-                    }
-                    return;
-                }
-                if (action_type === 'pan') {
-                    this.dom_node().setPointerCapture(event.pointerId);
-                    this.pan(new $mol_vector_2d(start_pan[0] + pos[0] - start_pos[0], start_pan[1] + pos[1] - start_pos[1]));
-                }
-                const precision = this.swipe_precision();
-                if ((this.swipe_right !== $mol_touch.prototype.swipe_right
-                    || this.swipe_from_left !== $mol_touch.prototype.swipe_from_left
-                    || this.swipe_to_right !== $mol_touch.prototype.swipe_to_right)
-                    && pos[0] - start_pos[0] > precision * 2
-                    && Math.abs(pos[1] - start_pos[1]) < precision) {
-                    this.swipe_right(event);
-                }
-                if ((this.swipe_left !== $mol_touch.prototype.swipe_left
-                    || this.swipe_from_right !== $mol_touch.prototype.swipe_from_right
-                    || this.swipe_to_left !== $mol_touch.prototype.swipe_to_left)
-                    && start_pos[0] - pos[0] > precision * 2
-                    && Math.abs(pos[1] - start_pos[1]) < precision) {
-                    this.swipe_left(event);
-                }
-                if ((this.swipe_bottom !== $mol_touch.prototype.swipe_bottom
-                    || this.swipe_from_top !== $mol_touch.prototype.swipe_from_top
-                    || this.swipe_to_bottom !== $mol_touch.prototype.swipe_to_bottom)
-                    && pos[1] - start_pos[1] > precision * 2
-                    && Math.abs(pos[0] - start_pos[0]) < precision) {
-                    this.swipe_bottom(event);
-                }
-                if ((this.swipe_top !== $mol_touch.prototype.swipe_top
-                    || this.swipe_from_bottom !== $mol_touch.prototype.swipe_from_bottom
-                    || this.swipe_to_top !== $mol_touch.prototype.swipe_to_top)
-                    && start_pos[1] - pos[1] > precision * 2
-                    && Math.abs(pos[0] - start_pos[0]) < precision) {
-                    this.swipe_top(event);
-                }
-                if (action_type === 'zoom') {
-                    const coords = this.pointer_coords();
-                    const distance = coords.distance();
-                    const start_distance = this.start_distance();
-                    const center = coords.center();
-                    const start_zoom = this.start_zoom();
-                    let mult = Math.abs(distance - start_distance) < 32 ? 1 : distance / start_distance;
-                    this.zoom(start_zoom * mult);
-                    const pan = new $mol_vector_2d((start_pan[0] - center[0] + pos[0] - start_pos[0]) * mult + center[0], (start_pan[1] - center[1] + pos[1] - start_pos[1]) * mult + center[1]);
-                    this.pan(pan);
-                }
-            }
-            event_end(event) {
-                const action = this.action_type();
-                if (action === 'draw') {
-                    this.draw_end(event);
-                }
-                this.event_leave(event);
-            }
-            event_leave(event) {
-                this.event_eat(event);
-                this.dom_node().releasePointerCapture(event.pointerId);
-                this.start_pos(null);
-            }
-            swipe_left(event) {
-                if (this.view_rect().right - this.start_pos()[0] < this.swipe_precision() * 2)
-                    this.swipe_from_right(event);
-                else
-                    this.swipe_to_left(event);
-                this.event_end(event);
-            }
-            swipe_right(event) {
-                if (this.start_pos()[0] - this.view_rect().left < this.swipe_precision() * 2)
-                    this.swipe_from_left(event);
-                else
-                    this.swipe_to_right(event);
-                this.event_end(event);
-            }
-            swipe_top(event) {
-                if (this.view_rect().bottom - this.start_pos()[1] < this.swipe_precision() * 2)
-                    this.swipe_from_bottom(event);
-                else
-                    this.swipe_to_top(event);
-                this.event_end(event);
-            }
-            swipe_bottom(event) {
-                if (this.start_pos()[1] - this.view_rect().top < this.swipe_precision() * 2)
-                    this.swipe_from_top(event);
-                else
-                    this.swipe_to_bottom(event);
-                this.event_end(event);
-            }
-            event_wheel(event) {
-                if (event.defaultPrevented)
-                    return;
-                if (this.pan === $mol_touch.prototype.pan && this.zoom === $mol_touch.prototype.zoom)
-                    return;
-                if (this.pan !== $mol_touch.prototype.pan) {
-                    event.preventDefault();
-                }
-                const action_type = this.event_eat(event);
-                if (action_type === 'zoom') {
-                    const zoom_prev = this.zoom() || 0.001;
-                    const zoom_next = zoom_prev * (1 - .001 * Math.min(event.deltaY, 100));
-                    const mult = zoom_next / zoom_prev;
-                    this.zoom(zoom_next);
-                    const pan_prev = this.pan();
-                    const center = this.pointer_center();
-                    const pan_next = pan_prev.multed0(mult).added1(center.multed0(1 - mult));
-                    this.pan(pan_next);
-                }
-                if (action_type === 'pan') {
-                    const pan_prev = this.pan();
-                    const pan_next = new $mol_vector_2d(pan_prev.x - event.deltaX, pan_prev.y - event.deltaY);
-                    this.pan(pan_next);
-                }
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_touch.prototype, "pointer_events", null);
-        __decorate([
-            $mol_mem
-        ], $mol_touch.prototype, "pointer_coords", null);
-        __decorate([
-            $mol_mem
-        ], $mol_touch.prototype, "pointer_center", null);
-        __decorate([
-            $mol_mem
-        ], $mol_touch.prototype, "action_point", null);
-        $$.$mol_touch = $mol_touch;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//mol/touch/touch.view.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_plot_pane extends $mol_svg_root {
-        aspect() {
-            return "none";
-        }
-        hue_base(val) {
-            if (val !== undefined)
-                return val;
-            return +NaN;
-        }
-        hue_shift(val) {
-            if (val !== undefined)
-                return val;
-            return 111;
-        }
-        gap_hor() {
-            return 48;
-        }
-        gap_vert() {
-            return 24;
-        }
-        gap_left() {
-            return this.gap_hor();
-        }
-        gap_right() {
-            return this.gap_hor();
-        }
-        gap_top() {
-            return this.gap_vert();
-        }
-        gap_bottom() {
-            return this.gap_vert();
-        }
-        gap() {
-            const obj = new this.$.$mol_vector_2d(this.gap_x(), this.gap_y());
-            return obj;
-        }
-        shift_limit() {
-            const obj = new this.$.$mol_vector_2d(this.shift_limit_x(), this.shift_limit_y());
-            return obj;
-        }
-        shift_default() {
-            const obj = new this.$.$mol_vector_2d(0, 0);
-            return obj;
-        }
-        shift(val) {
-            if (val !== undefined)
-                return val;
-            const obj = new this.$.$mol_vector_2d(0, 0);
-            return obj;
-        }
-        scale_limit() {
-            const obj = new this.$.$mol_vector_2d(this.scale_limit_x(), this.scale_limit_y());
-            return obj;
-        }
-        scale_default() {
-            const obj = new this.$.$mol_vector_2d(0, 0);
-            return obj;
-        }
-        scale(val) {
-            if (val !== undefined)
-                return val;
-            const obj = new this.$.$mol_vector_2d(1, -1);
-            return obj;
-        }
-        scale_x(val) {
-            if (val !== undefined)
-                return val;
-            return 1;
-        }
-        scale_y(val) {
-            if (val !== undefined)
-                return val;
-            return -1;
-        }
-        size() {
-            const obj = new this.$.$mol_vector_2d(0, 0);
-            return obj;
-        }
-        size_real() {
-            const obj = new this.$.$mol_vector_2d(1, 1);
-            return obj;
-        }
-        dimensions() {
-            const obj = new this.$.$mol_vector_2d(this.dimensions_x(), this.dimensions_y());
-            return obj;
-        }
-        dimensions_viewport() {
-            const obj = new this.$.$mol_vector_2d(this.dimensions_viewport_x(), this.dimensions_viewport_y());
-            return obj;
-        }
-        sub() {
-            return this.graphs_sorted();
-        }
-        graphs_colored() {
-            return this.graphs_visible();
-        }
-        plugins() {
-            return [
-                ...super.plugins(),
-                this.Touch()
-            ];
-        }
-        gap_x() {
-            const obj = new this.$.$mol_vector_range(this.gap_left(), this.gap_right());
-            return obj;
-        }
-        gap_y() {
-            const obj = new this.$.$mol_vector_range(this.gap_bottom(), this.gap_top());
-            return obj;
-        }
-        shift_limit_x() {
-            const obj = new this.$.$mol_vector_range(0, 0);
-            return obj;
-        }
-        shift_limit_y() {
-            const obj = new this.$.$mol_vector_range(0, 0);
-            return obj;
-        }
-        scale_limit_x() {
-            const obj = new this.$.$mol_vector_range(0, Infinity);
-            return obj;
-        }
-        scale_limit_y() {
-            const obj = new this.$.$mol_vector_range(0, -Infinity);
-            return obj;
-        }
-        dimensions_x() {
-            const obj = new this.$.$mol_vector_range(Infinity, -Infinity);
-            return obj;
-        }
-        dimensions_y() {
-            const obj = new this.$.$mol_vector_range(Infinity, -Infinity);
-            return obj;
-        }
-        dimensions_viewport_x() {
-            const obj = new this.$.$mol_vector_range(Infinity, -Infinity);
-            return obj;
-        }
-        dimensions_viewport_y() {
-            const obj = new this.$.$mol_vector_range(Infinity, -Infinity);
-            return obj;
-        }
-        graphs_sorted() {
-            return [];
-        }
-        graphs() {
-            return [];
-        }
-        graphs_positioned() {
-            return this.graphs();
-        }
-        graphs_visible() {
-            return this.graphs_positioned();
-        }
-        zoom(val) {
-            if (val !== undefined)
-                return val;
-            return 1;
-        }
-        allow_draw() {
-            return true;
-        }
-        allow_pan() {
-            return true;
-        }
-        allow_zoom() {
-            return true;
-        }
-        draw_start(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        draw(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        draw_end(event) {
-            if (event !== undefined)
-                return event;
-            return null;
-        }
-        cursor_position() {
-            return this.Touch().pointer_center();
-        }
-        action_type() {
-            return this.Touch().action_type();
-        }
-        action_point() {
-            return this.Touch().action_point();
-        }
-        Touch() {
-            const obj = new this.$.$mol_touch();
-            obj.zoom = (val) => this.zoom(val);
-            obj.pan = (val) => this.shift(val);
-            obj.allow_draw = () => this.allow_draw();
-            obj.allow_pan = () => this.allow_pan();
-            obj.allow_zoom = () => this.allow_zoom();
-            obj.draw_start = (event) => this.draw_start(event);
-            obj.draw = (event) => this.draw(event);
-            obj.draw_end = (event) => this.draw_end(event);
-            return obj;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "hue_base", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "hue_shift", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "gap", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "shift_limit", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "shift_default", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "shift", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "scale_limit", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "scale_default", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "scale", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "scale_x", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "scale_y", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "size", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "size_real", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "dimensions", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "dimensions_viewport", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "gap_x", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "gap_y", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "shift_limit_x", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "shift_limit_y", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "scale_limit_x", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "scale_limit_y", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "dimensions_x", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "dimensions_y", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "dimensions_viewport_x", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "dimensions_viewport_y", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "zoom", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "draw_start", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "draw", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "draw_end", null);
-    __decorate([
-        $mol_mem
-    ], $mol_plot_pane.prototype, "Touch", null);
-    $.$mol_plot_pane = $mol_plot_pane;
-})($ || ($ = {}));
-//mol/plot/pane/-view.tree/pane.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_mem_cached = $mol_wire_probe;
-})($ || ($ = {}));
-//mol/mem/cached/cached.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/plot/pane/pane.view.css", "[mol_plot_pane] {\n\tcolor: var(--mol_theme_control);\n\tflex: 1 1 auto;\n\talign-self: stretch;\n\tstroke-width: 2px;\n\tuser-select: none;\n}\n");
-})($ || ($ = {}));
-//mol/plot/pane/-css/pane.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_plot_pane extends $.$mol_plot_pane {
-            dimensions() {
-                const graphs = this.graphs();
-                let next = new this.$.$mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
-                for (let graph of graphs) {
-                    next = next.expanded2(graph.dimensions());
-                }
-                return next;
-            }
-            size() {
-                const dims = this.dimensions();
-                return new this.$.$mol_vector_2d((dims.x.max - dims.x.min) || 1, (dims.y.max - dims.y.min) || 1);
-            }
-            graph_hue(index) {
-                return (360 + (this.hue_base() + this.hue_shift() * index) % 360) % 360;
-            }
-            graphs_colored() {
-                const graphs = this.graphs_visible();
-                for (let index = 0; index < graphs.length; index++) {
-                    graphs[index].hue = () => this.graph_hue(index);
-                }
-                return graphs;
-            }
-            size_real() {
-                const rect = this.view_rect();
-                if (!rect)
-                    return new this.$.$mol_vector_2d(1, 1);
-                return new this.$.$mol_vector_2d(rect.width, rect.height);
-            }
-            view_box() {
-                const size = this.size_real();
-                return `0 0 ${size.x} ${size.y}`;
-            }
-            scale_limit() {
-                const { x: { max: right }, y: { max: top } } = super.scale_limit();
-                const gap = this.gap();
-                const size = this.size();
-                const real = this.size_real();
-                const left = +(real.x - gap.x.min - gap.x.max) / size.x;
-                const bottom = -(real.y - gap.y.max - gap.y.min) / size.y;
-                return new this.$.$mol_vector_2d(new this.$.$mol_vector_range(left, right), new this.$.$mol_vector_range(top, bottom));
-            }
-            scale_default() {
-                const limits = this.scale_limit();
-                return new $mol_vector_2d(limits.x.min, limits.y.max);
-            }
-            scale(next) {
-                if (next === undefined) {
-                    if (!this.graph_touched)
-                        return this.scale_default();
-                    next = $mol_mem_cached(() => this.scale()) ?? this.scale_default();
-                }
-                this.graph_touched = true;
-                return next.limited(this.scale_limit());
-            }
-            scale_x(next) {
-                return this.scale(next === undefined
-                    ? undefined
-                    : new $mol_vector_2d(next, this.scale().y)).x;
-            }
-            scale_y(next) {
-                return this.scale(next === undefined
-                    ? undefined
-                    : new $mol_vector_2d(this.scale().x, next)).y;
-            }
-            shift_limit() {
-                const dims = this.dimensions();
-                const [scale_x, scale_y] = this.scale();
-                const size = this.size_real();
-                const gap = this.gap();
-                const left = gap.x.min - dims.x.min * scale_x;
-                const right = size.x - gap.x.max - dims.x.max * scale_x;
-                const top = gap.y.max - dims.y.max * scale_y;
-                const bottom = size.y - gap.y.min - dims.y.min * scale_y;
-                return new this.$.$mol_vector_2d(new this.$.$mol_vector_range(right, left), new this.$.$mol_vector_range(bottom, top));
-            }
-            shift_default() {
-                const limits = this.shift_limit();
-                return new $mol_vector_2d(limits.x.min, limits.y.min);
-            }
-            graph_touched = false;
-            shift(next) {
-                if (next === undefined) {
-                    if (!this.graph_touched)
-                        return this.shift_default();
-                    next = $mol_mem_cached(() => this.shift()) ?? this.shift_default();
-                }
-                this.graph_touched = true;
-                return next.limited(this.shift_limit());
-            }
-            reset(event) {
-                this.graph_touched = false;
-                this.scale(this.scale_default());
-                this.shift(this.shift_default());
-            }
-            graphs_visible() {
-                const viewport = this.dimensions_viewport();
-                const size_real = this.size_real();
-                const max_x = (viewport.x.max - viewport.x.min) / size_real.x;
-                const max_y = (viewport.y.max - viewport.y.min) / size_real.y;
-                return this.graphs_positioned().filter(graph => {
-                    const dims = graph.dimensions();
-                    if (dims.x.min > dims.x.max)
-                        return true;
-                    if (dims.y.min > dims.y.max)
-                        return true;
-                    const size_x = dims.x.max - dims.x.min;
-                    const size_y = dims.y.max - dims.y.min;
-                    if ((size_x || size_y) && size_x < max_x && size_y < max_y)
-                        return false;
-                    if (dims.x.min > viewport.x.max)
-                        return false;
-                    if (dims.x.max < viewport.x.min)
-                        return false;
-                    if (dims.y.min > viewport.y.max)
-                        return false;
-                    if (dims.y.max < viewport.y.min)
-                        return false;
-                    return true;
-                });
-            }
-            graphs_positioned() {
-                const graphs = this.graphs();
-                for (let graph of graphs) {
-                    graph.shift = () => this.shift();
-                    graph.scale = () => this.scale();
-                    graph.dimensions_pane = () => this.dimensions_viewport();
-                    graph.viewport = () => this.viewport();
-                    graph.size_real = () => this.size_real();
-                    graph.cursor_position = () => this.cursor_position();
-                    graph.gap = () => this.gap();
-                }
-                return graphs;
-            }
-            dimensions_viewport() {
-                const shift = this.shift().multed0(-1);
-                const scale = this.scale().powered0(-1);
-                return this.viewport().map((range, i) => range.added0(shift[i]).multed0(scale[i]).sort((a, b) => a - b));
-            }
-            viewport() {
-                const size = this.size_real();
-                return new this.$.$mol_vector_2d(new this.$.$mol_vector_range(0, size.x), new this.$.$mol_vector_range(0, size.y));
-            }
-            graphs_sorted() {
-                const graphs = this.graphs_colored();
-                const sorted = [];
-                for (let graph of graphs)
-                    sorted.push(...graph.back());
-                for (let graph of graphs)
-                    sorted.push(...graph.front());
-                return sorted;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "dimensions", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "size", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "graphs_colored", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "scale_limit", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "scale", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "shift_limit", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "shift_default", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "shift", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "graphs_visible", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "graphs_positioned", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "dimensions_viewport", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "viewport", null);
-        __decorate([
-            $mol_mem
-        ], $mol_plot_pane.prototype, "graphs_sorted", null);
-        $$.$mol_plot_pane = $mol_plot_pane;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-//mol/plot/pane/pane.view.ts
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_chart extends $mol_view {
-        gap_hor() {
-            return 48;
-        }
-        gap_vert() {
-            return 24;
-        }
-        gap_left() {
-            return this.gap_hor();
-        }
-        gap_right() {
-            return this.gap_hor();
-        }
-        gap_bottom() {
-            return this.gap_vert();
-        }
-        gap_top() {
-            return this.gap_vert();
-        }
-        graphs() {
-            return [];
-        }
-        sub() {
-            return [
-                this.Legend(),
-                this.Plot()
-            ];
-        }
-        Legend() {
-            const obj = new this.$.$mol_chart_legend();
-            obj.graphs = () => this.graphs_colored();
-            return obj;
-        }
-        hue_base() {
-            return 140;
-        }
-        hue_shift() {
-            return 111;
-        }
-        zoom(val) {
-            return this.Plot().scale_x(val);
-        }
-        graphs_colored() {
-            return this.Plot().graphs_colored();
-        }
-        Plot() {
-            const obj = new this.$.$mol_plot_pane();
-            obj.zoom = (val) => this.zoom(val);
-            obj.gap_left = () => this.gap_left();
-            obj.gap_right = () => this.gap_right();
-            obj.gap_bottom = () => this.gap_bottom();
-            obj.gap_top = () => this.gap_top();
-            obj.graphs = () => this.graphs();
-            obj.hue_base = () => this.hue_base();
-            obj.hue_shift = () => this.hue_shift();
-            return obj;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_chart.prototype, "Legend", null);
-    __decorate([
-        $mol_mem
-    ], $mol_chart.prototype, "Plot", null);
-    $.$mol_chart = $mol_chart;
-})($ || ($ = {}));
-//mol/chart/-view.tree/chart.view.tree.ts
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/chart/chart.view.css", "[mol_chart] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-self: stretch;\n\tflex: 1 1 auto;\n}\n\n[mol_chart_plot] {\n\tflex: 1 0 50%;\n\tmargin: .5rem;\n}\n");
-})($ || ($ = {}));
-//mol/chart/-css/chart.view.css.ts
-;
-"use strict";
-var $;
-(function ($) {
     class $scripts extends $mol_page {
         body() {
             return [
-                this.Chart()
+                this.txt2img(),
+                this.img2img(),
+                this.root()
             ];
         }
-        fact_title() {
+        txt2img() {
+            const obj = new this.$.$scripts_chart();
+            obj.ed_title = () => this.txt2img_title();
+            obj.y = () => this.txt2img_y();
+            obj.x = () => this.x();
+            return obj;
+        }
+        img2img() {
+            const obj = new this.$.$scripts_chart();
+            obj.ed_title = () => this.img2img_title();
+            obj.y = () => this.img2img_y();
+            obj.x = () => this.x();
+            return obj;
+        }
+        root() {
+            const obj = new this.$.$scripts_chart();
+            obj.ed_title = () => this.root_title();
+            obj.y = () => this.root_y();
+            obj.x = () => this.x();
+            return obj;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $scripts.prototype, "txt2img", null);
+    __decorate([
+        $mol_mem
+    ], $scripts.prototype, "img2img", null);
+    __decorate([
+        $mol_mem
+    ], $scripts.prototype, "root", null);
+    $.$scripts = $scripts;
+    class $scripts_chart extends $mol_chart {
+        graphs() {
+            return [
+                this.Fact(),
+                this.Vert_ruler(),
+                this.Marker_hor(),
+                this.Marker_cross()
+            ];
+        }
+        ed_title() {
             return "Gb";
         }
-        facts() {
+        y() {
             return [];
         }
         Fact_line() {
@@ -6009,8 +6052,8 @@ var $;
         }
         Fact() {
             const obj = new this.$.$mol_plot_group();
-            obj.title = () => this.fact_title();
-            obj.series_y = () => this.facts();
+            obj.title = () => this.ed_title();
+            obj.series_y = () => this.y();
             obj.graphs = () => [
                 this.Fact_line(),
                 this.Fact_dots()
@@ -6024,13 +6067,13 @@ var $;
         marker_hor_title() {
             return "Days";
         }
-        months() {
+        x() {
             return [];
         }
         Marker_hor() {
             const obj = new this.$.$mol_plot_mark_hor();
             obj.title = () => this.marker_hor_title();
-            obj.labels = () => this.months();
+            obj.labels = () => this.x();
             return obj;
         }
         Marker_cross() {
@@ -6042,39 +6085,26 @@ var $;
             ];
             return obj;
         }
-        Chart() {
-            const obj = new this.$.$mol_chart();
-            obj.graphs = () => [
-                this.Fact(),
-                this.Vert_ruler(),
-                this.Marker_hor(),
-                this.Marker_cross()
-            ];
-            return obj;
-        }
     }
     __decorate([
         $mol_mem
-    ], $scripts.prototype, "Fact_line", null);
+    ], $scripts_chart.prototype, "Fact_line", null);
     __decorate([
         $mol_mem
-    ], $scripts.prototype, "Fact_dots", null);
+    ], $scripts_chart.prototype, "Fact_dots", null);
     __decorate([
         $mol_mem
-    ], $scripts.prototype, "Fact", null);
+    ], $scripts_chart.prototype, "Fact", null);
     __decorate([
         $mol_mem
-    ], $scripts.prototype, "Vert_ruler", null);
+    ], $scripts_chart.prototype, "Vert_ruler", null);
     __decorate([
         $mol_mem
-    ], $scripts.prototype, "Marker_hor", null);
+    ], $scripts_chart.prototype, "Marker_hor", null);
     __decorate([
         $mol_mem
-    ], $scripts.prototype, "Marker_cross", null);
-    __decorate([
-        $mol_mem
-    ], $scripts.prototype, "Chart", null);
-    $.$scripts = $scripts;
+    ], $scripts_chart.prototype, "Marker_cross", null);
+    $.$scripts_chart = $scripts_chart;
 })($ || ($ = {}));
 //scripts/-view.tree/scripts.view.tree.ts
 ;
@@ -6847,11 +6877,26 @@ var $;
             data() {
                 return $mol_fetch.json('http://141.105.71.75:5004/report.json');
             }
-            months() {
-                return this.data().map(report => (new $mol_time_moment((new Date(report.time))).toString('YYYY-MM-DD hh:mm')));
+            x() {
+                return this.data().map(report => (new $mol_time_moment((new Date(report.time))).toString('MM-DD hh:mm')));
             }
-            facts() {
+            root_y() {
+                return this.data().map(report => report.root.used.split(' ')[0]);
+            }
+            txt2img_y() {
                 return this.data().map(report => report.txt2img.used.split(' ')[0]);
+            }
+            img2img_y() {
+                return this.data().map(report => report.img2img.used.split(' ')[0]);
+            }
+            root_title() {
+                return this.data()[0].root.used.split(' ')[1] + ' used, root';
+            }
+            txt2img_title() {
+                return this.data()[0].txt2img.used.split(' ')[1] + ' used, txt2img';
+            }
+            img2img_title() {
+                return this.data()[0].img2img.used.split(' ')[1] + ' used, img2img';
             }
         }
         __decorate([

@@ -118,164 +118,6 @@ $mol_plot_graph_sample $mol_view
 		^
 		color <= color \black
 
-$mol_plot_line $mol_plot_graph
-	threshold 1
-	spacing 2
-	color_fill \none
-	dom_name \path
-	attr *
-		^
-		d <= curve \
-	sub /
-		<= Hint
-	-
-	Sample $mol_plot_graph_sample
-		color <= color
-		type <= type
-
-$mol_svg_path $mol_svg
-	dom_name \path
-	attr *
-		^
-		d <= geometry \
-
-
-$mol_plot_dot $mol_plot_graph
-	points_max +Infinity
-	aspect 1
-	style *
-		^
-		stroke-width <= diameter 8
-	sub /
-		<= Hint
-		<= Curve $mol_svg_path
-			geometry <= curve \
-	-
-	Sample $mol_plot_graph_sample
-		color <= color
-
-$mol_plot_group $mol_plot_graph
-	sub <= graphs_enriched <= graphs /$mol_plot_graph
-	Sample $mol_plot_graph_sample
-		sub <= graph_samples /$mol_view
-
-$mol_svg_text $mol_svg
-	dom_name \text
-	pos /
-	attr *
-		^
-		x <= pos_x \
-		y <= pos_y \
-		text-anchor <= align \middle
-	sub /
-		<= text \
-
-$mol_svg_rect $mol_svg
-	dom_name \rect
-	pos /
-	attr *
-		^
-		width <= width \0
-		height <= height \0
-		x <= pos_x \
-		y <= pos_y \
-
-$mol_svg_text_box $mol_svg_group
-	font_size 16
-	width 0
-	sub /
-		<= Back $mol_svg_rect
-			width <= box_width \0.5rem
-			height <= box_height \1rem
-			pos /
-				<= box_pos_x <= pos_x
-				<= box_pos_y \0
-		<= Text $mol_svg_text
-			pos /
-				<= pos_x \0
-				<= pos_y \100%
-			align <= align \start
-			sub /
-				<= text \
-
-$mol_plot_ruler $mol_plot_graph
-	step 0
-	scale_axis 1
-	scale_step 1
-	shift_axis 1
-	dimensions_axis $mol_vector_range /
-		Infinity
-		-Infinity
-	viewport_axis $mol_vector_range /
-		Infinity
-		-Infinity
-	axis_points /number
-	normalize?val 0
-	precision 1
-	sub /
-		<= Background $mol_svg_rect
-			pos_x <= background_x \0
-			pos_y <= background_y \0
-			width <= background_width \100%
-			height <= background_height \14
-		<= Curve $mol_svg_path
-			geometry <= curve \
-		<= labels_formatted /
-		<= Title $mol_svg_text_box
-			pos_x <= title_pos_x \0
-			pos_y <= title_pos_y \100%
-			align <= title_align \start
-			text <= title
-	Label* $mol_svg_text
-		pos <= label_pos* /
-			<= label_pos_x* \
-			<= label_pos_y* \
-		text <= label_text* \
-		align <= label_align \
-
-$mol_plot_ruler_vert $mol_plot_ruler
-	title_align \end
-	label_align \end
-	title_pos_y \14
-	label_pos_x* <= title_pos_x
-	background_height \100%
-	background_width <= title_pos_x
-
-$mol_plot_ruler_hor $mol_plot_ruler
-	title_align \start
-	label_align \middle
-	title_pos_x \0
-	title_pos_y \100%
-	label_pos_y* <= title_pos_y
-	background_width \100%
-
-$mol_plot_mark_hor $mol_plot_ruler_hor
-	labels /string
-
-$mol_plot_mark_cross $mol_plot_graph
-	labels /string
-	title_x_gap 4
-	threshold 16
-	graphs /$mol_plot_graph
-	dimensions $mol_vector_2d /
-		<= dimensions_x $mol_vector_range /
-			Infinity
-			-Infinity
-		<= dimensions_y $mol_vector_range /
-			Infinity
-			-Infinity
-	sub /
-		<= Curve $mol_svg_path
-			geometry <= curve \
-		<= Label_x $mol_svg_text_box
-			pos_x <= title_x_pos_x \0
-			pos_y <= title_x_pos_y \100%
-			text <= title_x \
-		<= Label_y $mol_svg_text_box
-			pos_x <= title_y_pos_x \0
-			pos_y <= title_y_pos_y \0
-			text <= title_y \
-
 $mol_chart_legend $mol_scroll
 	graphs /$mol_plot_graph
 	graphs_front /$mol_plot_graph
@@ -467,22 +309,193 @@ $mol_chart $mol_view
 			hue_base <= hue_base 140
 			hue_shift <= hue_shift 111
 
+$mol_plot_line $mol_plot_graph
+	threshold 1
+	spacing 2
+	color_fill \none
+	dom_name \path
+	attr *
+		^
+		d <= curve \
+	sub /
+		<= Hint
+	-
+	Sample $mol_plot_graph_sample
+		color <= color
+		type <= type
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_plot_dot $mol_plot_graph
+	points_max +Infinity
+	aspect 1
+	style *
+		^
+		stroke-width <= diameter 8
+	sub /
+		<= Hint
+		<= Curve $mol_svg_path
+			geometry <= curve \
+	-
+	Sample $mol_plot_graph_sample
+		color <= color
+
+$mol_plot_group $mol_plot_graph
+	sub <= graphs_enriched <= graphs /$mol_plot_graph
+	Sample $mol_plot_graph_sample
+		sub <= graph_samples /$mol_view
+
+$mol_svg_text $mol_svg
+	dom_name \text
+	pos /
+	attr *
+		^
+		x <= pos_x \
+		y <= pos_y \
+		text-anchor <= align \middle
+	sub /
+		<= text \
+
+$mol_svg_rect $mol_svg
+	dom_name \rect
+	pos /
+	attr *
+		^
+		width <= width \0
+		height <= height \0
+		x <= pos_x \
+		y <= pos_y \
+
+$mol_svg_text_box $mol_svg_group
+	font_size 16
+	width 0
+	sub /
+		<= Back $mol_svg_rect
+			width <= box_width \0.5rem
+			height <= box_height \1rem
+			pos /
+				<= box_pos_x <= pos_x
+				<= box_pos_y \0
+		<= Text $mol_svg_text
+			pos /
+				<= pos_x \0
+				<= pos_y \100%
+			align <= align \start
+			sub /
+				<= text \
+
+$mol_plot_ruler $mol_plot_graph
+	step 0
+	scale_axis 1
+	scale_step 1
+	shift_axis 1
+	dimensions_axis $mol_vector_range /
+		Infinity
+		-Infinity
+	viewport_axis $mol_vector_range /
+		Infinity
+		-Infinity
+	axis_points /number
+	normalize?val 0
+	precision 1
+	sub /
+		<= Background $mol_svg_rect
+			pos_x <= background_x \0
+			pos_y <= background_y \0
+			width <= background_width \100%
+			height <= background_height \14
+		<= Curve $mol_svg_path
+			geometry <= curve \
+		<= labels_formatted /
+		<= Title $mol_svg_text_box
+			pos_x <= title_pos_x \0
+			pos_y <= title_pos_y \100%
+			align <= title_align \start
+			text <= title
+	Label* $mol_svg_text
+		pos <= label_pos* /
+			<= label_pos_x* \
+			<= label_pos_y* \
+		text <= label_text* \
+		align <= label_align \
+
+$mol_plot_ruler_vert $mol_plot_ruler
+	title_align \end
+	label_align \end
+	title_pos_y \14
+	label_pos_x* <= title_pos_x
+	background_height \100%
+	background_width <= title_pos_x
+
+$mol_plot_ruler_hor $mol_plot_ruler
+	title_align \start
+	label_align \middle
+	title_pos_x \0
+	title_pos_y \100%
+	label_pos_y* <= title_pos_y
+	background_width \100%
+
+$mol_plot_mark_hor $mol_plot_ruler_hor
+	labels /string
+
+$mol_plot_mark_cross $mol_plot_graph
+	labels /string
+	title_x_gap 4
+	threshold 16
+	graphs /$mol_plot_graph
+	dimensions $mol_vector_2d /
+		<= dimensions_x $mol_vector_range /
+			Infinity
+			-Infinity
+		<= dimensions_y $mol_vector_range /
+			Infinity
+			-Infinity
+	sub /
+		<= Curve $mol_svg_path
+			geometry <= curve \
+		<= Label_x $mol_svg_text_box
+			pos_x <= title_x_pos_x \0
+			pos_y <= title_x_pos_y \100%
+			text <= title_x \
+		<= Label_y $mol_svg_text_box
+			pos_x <= title_y_pos_x \0
+			pos_y <= title_y_pos_y \0
+			text <= title_y \
+
 $scripts $mol_page
 	body /
-		<= Chart $mol_chart
+		<= txt2img $scripts_chart
+			ed_title <= txt2img_title
+			y <= txt2img_y
+			x <= x
+		<= img2img $scripts_chart
+			ed_title <= img2img_title
+			y <= img2img_y
+			x <= x
+		<= root $scripts_chart
+			ed_title <= root_title
+			y <= root_y
+			x <= x
+
+$scripts_chart $mol_chart
+	graphs /
+		<= Fact $mol_plot_group
+			title <= ed_title \Gb
+			series_y <= y /
 			graphs /
-				<= Fact $mol_plot_group
-					title <= fact_title \Gb
-					series_y <= facts /
-					graphs /
-						<= Fact_line $mol_plot_line
-						<= Fact_dots $mol_plot_dot
-				<= Vert_ruler $mol_plot_ruler_vert
-				<= Marker_hor $mol_plot_mark_hor
-					title <= marker_hor_title \Days
-					labels <= months /string
-				<= Marker_cross $mol_plot_mark_cross
-					labels <= months
-					graphs /
-						<= Fact
-						<= Fact_dots
+				<= Fact_line $mol_plot_line
+				<= Fact_dots $mol_plot_dot
+		<= Vert_ruler $mol_plot_ruler_vert
+		<= Marker_hor $mol_plot_mark_hor
+			title <= marker_hor_title \Days
+			labels <= x /string
+		<= Marker_cross $mol_plot_mark_cross
+			labels <= months
+			graphs /
+				<= Fact
+				<= Fact_dots
