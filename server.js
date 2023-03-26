@@ -28,6 +28,7 @@ http.createServer(function (req, res) {
     const extname = String(path.extname(filePath)).toLowerCase();
     const contentType = mimeTypes[extname] || 'application/octet-stream';
     res.writeHead(200, { 'Content-Type': contentType });
+    res.writeHead(200, { 'Access-Control-Allow-Origin': "*" });
 
     const stream = fs.createReadStream(filePath);
     stream.on('error', function () {
